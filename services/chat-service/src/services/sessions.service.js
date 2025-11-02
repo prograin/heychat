@@ -14,6 +14,7 @@ export const createSessionService = async (userId, partnerId) => {
   if (existing.length !== 0) throw new ErrorUtil("Session already exists", 409);
 
   const session = await createSession(userId, partnerId, "active");
+  await sessionsCache.setHasActiveSession(userId, hasActive);
   return session;
 };
 
@@ -32,6 +33,7 @@ export const getSessionsByTargetService = async (userId, partnerId) => {
 export const updateSessionService = async (userId, partnerId, status) => {
   const updated = await updateSessionStatus(userId, partnerId, status);
   if (!updated) throw new ErrorUtil("Session not found", 404);
+  await sessionsCache.setHasActiveSession(userId, status === "active");
   return updated;
 };
 
@@ -39,5 +41,8 @@ export const checkActiveSessionService = async (userId) => {
   const hasActiveSession = await sessionsCache.getHasActiveSession(userId);
   if (hasActiveSession != null) return hasActiveSession;
   const sessions = await getActiveSessions(userId);
-  return sessions.length === 0;
+  const hasActive = sessions.length > 0;
+
+  await sessionsCache.setHasActiveSession(userId, hasActive);
+  return hasActive;
 };

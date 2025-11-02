@@ -24,7 +24,6 @@ class UserProducer {
   }
 
   async publishUserDeleted(userId, data) {
-    console.log("asdasd");
     try {
       const messageId = redis.xadd(
         REDIS_STREAMS.user.name,

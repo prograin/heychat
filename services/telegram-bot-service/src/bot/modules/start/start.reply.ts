@@ -32,7 +32,7 @@ export default async (bot: TelegramBot, event: BotEvent, response: Response) => 
     } else {
       const user = await UserAdminController.createUser(usersTelegramData);
       console.log(`🆕 User created: ${user.data.id}`);
-      await bot.sendMessage(chatId, welcome_back_text(firstName), options);
+      await bot.sendMessage(chatId, welcome_text(firstName), options);
       const token = await generateUserToken({
         user_id: user.data.id,
         telegram_id: userTelegramId,

@@ -4,6 +4,7 @@ import { authMiddleware } from "../middlewares/auth.middleware.js";
 import { allowRole } from "../middlewares/allow-role.middleware.js";
 import validateMiddleware from "../middlewares/validate.middleware.js";
 import {
+  checkActiveSessionController,
   createSessionController,
   getSessionsByTargetController,
   getSessionsController,
