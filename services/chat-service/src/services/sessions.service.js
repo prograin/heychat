@@ -14,7 +14,7 @@ export const createSessionService = async (userId, partnerId) => {
   if (existing.length !== 0) throw new ErrorUtil("Session already exists", 409);
 
   const session = await createSession(userId, partnerId, "active");
-  await sessionsCache.setHasActiveSession(userId, hasActive);
+  await sessionsCache.setHasActiveSession(userId, true);
   return session;
 };
 

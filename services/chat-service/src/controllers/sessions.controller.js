@@ -42,7 +42,7 @@ export const getSessionsController = async (req, res, next) => {
 export const getSessionsByTargetController = async (req, res, next) => {
   try {
     const userId = req.user.user_id;
-    const partnerId = req.params.targetId;
+    const partnerId = Number(req.params.targetId);
 
     const session = await getSessionsByTargetService(userId, partnerId);
     return res.status(200).json({ session });
@@ -57,10 +57,10 @@ export const updateSessionController = async (req, res, next) => {
     const partnerId = req.body.partner_id;
     const { status } = req.body;
 
-    const session = await updateSessionService(userId, partnerId, status);
+    const sessions = await updateSessionService(userId, partnerId, status);
     return res.status(200).json({
       message: "Session updated successfully",
-      session,
+      sessions,
     });
   } catch (error) {
     next(error);

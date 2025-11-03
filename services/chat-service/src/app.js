@@ -10,11 +10,12 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/chat/requests", topLevelRequestsRouter);
 app.use("/chat/sessions", topLevelSessionsRouter);
-app.use("/user/:userId/chat/sessions", usersSessionsRouter);
+app.use("/users/:userId/chat/sessions", usersSessionsRouter);
 app.use((req, res) => {
   res.status(404).json({ success: false, message: "Route not found" });
 });
 
 app.use(errorHandler);
 
+// http://localhost:3006/users/11/chat/sessions/check/active
 export default app;
