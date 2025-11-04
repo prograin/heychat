@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const checkBlockedMiddleware = async (req, res, next) => {
   try {
     const requesterId = req.user.id;
@@ -7,7 +9,7 @@ export const checkBlockedMiddleware = async (req, res, next) => {
       return next();
     }
 
-    const response = await UserAxiosInstance.get(`http://${process.env.API_URL}:3007/relations/blocks/check/${targetId}`, {
+    const response = await axios.get(`http://${process.env.API_URL}:3007/relations/blocks/check/${targetId}`, {
       headers: { Authorization: req.headers.authorization },
     });
 

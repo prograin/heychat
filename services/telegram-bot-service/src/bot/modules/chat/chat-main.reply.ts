@@ -2,8 +2,14 @@ import TelegramBot, { Message, CallbackQuery } from "node-telegram-bot-api";
 import BotResponse from "src/bot/types/bot-response.type";
 import { BotEvent } from "src/bot/types/bot-event.type";
 import chatSendRequestReply from "./chat-send-request.reply";
+import chatForwardMessageReply from "./chat-forward-message.reply";
 
-const chatMainReplyMessage = async (bot: TelegramBot, message: Message, response: BotResponse) => {};
+const chatMainReplyMessage = async (bot: TelegramBot, message: Message, response: BotResponse) => {
+  if (response.user.has_session) {
+    await chatForwardMessageReply(bot, message, response);
+    return;
+  }
+};
 
 const chatMainReplyCallback = async (bot: TelegramBot, callbackQuery: CallbackQuery, response: BotResponse) => {
   const callbackDataPart = response.callback!.data.parts;

@@ -1,4 +1,3 @@
-import jwt, { JwtPayload } from "jsonwebtoken";
 import { getUserToken } from "src/api/cache/auth.cache";
 import { BotEvent } from "src/bot/types/bot-event.type";
 import BotResponse from "src/bot/types/bot-response.type";
@@ -26,9 +25,7 @@ export const authInterceptor = async (event: BotEvent, response: BotResponse, ne
       return next();
     } else {
       const chatId = "chat" in event ? event.chat.id : event.message?.chat.id;
-      const text = "chat" in event ? event.text : event.message?.text;
-      const isMatch = commandPatterns.some((pattern) => pattern.test(text as string));
-      if (!isMatch) await bot.sendMessage(chatId as number, "Please /start and try again");
+      await bot.sendMessage(chatId as number, "Please /start and try again");
     }
   } catch (err: any) {
     const chat_id = await getMessageFromEvent(event);

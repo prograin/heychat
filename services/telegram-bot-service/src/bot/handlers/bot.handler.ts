@@ -5,7 +5,7 @@ import profile from "src/bot/modules/profile/profile-main.reply";
 import { CommandExpression } from "src/bot/buttons/command.button";
 import { InlineCallback } from "../../bot/buttons/inline.button";
 import { userButtonClickedInterceptor } from "src/bot/interceptor/user-button-clicked.interceptor";
-import { messageValidateInterceptor } from "src/bot/interceptor/message-validate.interceptor";
+import { fromValidateInterceptor } from "src/bot/interceptor/from-validate.interceptor";
 import { authInterceptor } from "src/bot/interceptor/auth.interceptor";
 import { userValidateInterceptor } from "src/bot/interceptor/user-validate.interceptor";
 import { interceptorRunner } from "src/bot/interceptor/runner/interceptor-runner";
@@ -18,6 +18,8 @@ import chat from "../modules/chat/chat-main.reply";
 import relations from "../modules/relations/relations-main.reply";
 import { KeyboardName } from "../buttons/keyboard.button";
 import { response } from "express";
+import { userSessionInterceptor } from "../interceptor/user-session.interceptor";
+import { noneCommandFilterInterceptor } from "../interceptor/none-command-filter.interceptor";
 
 export class ManageHandlers {
   private bot: TelegramBot;
@@ -34,13 +36,13 @@ export class ManageHandlers {
       CommandExpression.c_start_exp,
       interceptorRunner(
         this.bot,
-        [messageValidateInterceptor, userTokenValidateInterceptor, userValidateInterceptor, userButtonClickedInterceptor],
+        [fromValidateInterceptor, userTokenValidateInterceptor, userValidateInterceptor, userButtonClickedInterceptor],
         start
       )
     );
     this.bot.onText(
       CommandExpression.c_username_exp,
-      interceptorRunner(this.bot, [messageValidateInterceptor, authInterceptor, userButtonClickedInterceptor], search)
+      interceptorRunner(this.bot, [fromValidateInterceptor, authInterceptor, userButtonClickedInterceptor], search)
     );
   }
 
@@ -49,12 +51,23 @@ export class ManageHandlers {
       "message",
       interceptorRunner(
         this.bot,
-        [messageValidateInterceptor, authInterceptor, userButtonClickedInterceptor, userPermissionsInterceptor],
+        [
+          fromValidateInterceptor,
+          noneCommandFilterInterceptor,
+          authInterceptor,
+          userButtonClickedInterceptor,
+          userPermissionsInterceptor,
+          userSessionInterceptor,
+        ],
         async (bot, event: BotEvent, response) => {
           const message = event as Message;
 
-          const text = message.text?.trim();
+          if (response.user.has_session) {
+            await chat(bot, message, response);
+            return;
+          }
 
+          const text = message.text?.trim();
           if (!text) return;
 
           switch (text) {
@@ -77,7 +90,7 @@ export class ManageHandlers {
       interceptorRunner(
         this.bot,
         [
-          messageValidateInterceptor,
+          fromValidateInterceptor,
           authInterceptor,
           userButtonClickedInterceptor,
           splitCallbackDataInterceptor,

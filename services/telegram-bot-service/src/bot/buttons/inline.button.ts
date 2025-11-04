@@ -23,6 +23,8 @@ export class InlineName {
   static in_contact_remove_n = "Remove From Contact";
   static in_block_n = "Block";
   static in_unblock_n = "Unblock";
+  static in_accept_request_n = "Accept";
+  static in_decline_request_n = "Decline";
 }
 
 export class InlineCallback {
@@ -50,6 +52,8 @@ export class InlineCallback {
   static in_contact_remove_c = "RELATIONS::{userId}::removeContact";
   static in_block_c = "RELATIONS::{userId}::block";
   static in_unblock_c = "RELATIONS::{userId}::unblock";
+  static in_accept_request_c = "CHATS::{userId}::acceptRequest";
+  static in_decline_request_c = "CHATS::{userId}::declineRequest";
 }
 
 export class InlineMeta {
@@ -180,5 +184,15 @@ export class InlineButton {
   static in_unblock_b = {
     text: InlineName.in_unblock_n,
     callback_data: InlineCallback.in_unblock_c,
+  };
+
+  static in_accept_request_b = {
+    text: InlineName.in_accept_request_n,
+    callback_data: InlineCallback.in_accept_request_c,
+  };
+
+  static in_decline_request_b = {
+    text: InlineName.in_decline_request_n,
+    callback_data: InlineCallback.in_decline_request_c,
   };
 }

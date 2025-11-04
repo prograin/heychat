@@ -48,7 +48,6 @@ export const updateSessionStatus = async (userId, partnerId, status) => {
       where: {
         user_id: userId,
         partner_id: partnerId,
-        status,
       },
       returning: true,
     }

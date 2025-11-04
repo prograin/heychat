@@ -3,6 +3,7 @@ import { UserAdminController } from "../users/user.controller";
 import { ChatSelfController } from "./chat.controller";
 import User from "src/bot/types/user.type";
 import { recieved_request, requests_was_sent_text, send_request_text } from "./chat.text";
+import { ma_send_request_in } from "./chat.markup";
 
 const THRESHOLD = 4 * 60 * 1000;
 
@@ -28,13 +29,17 @@ async function chatSendRequestReply(bot: TelegramBot, callbackQuery: CallbackQue
     if (elapsed < THRESHOLD) {
       await bot.answerCallbackQuery(callbackQuery.id, { text: requests_was_sent_text(elapsed, THRESHOLD - elapsed), show_alert: true });
     } else {
-      await bot.sendMessage(to_telegram_chat_id, recieved_request(from_username));
+      await bot.sendMessage(to_telegram_chat_id, recieved_request(from_username), {
+        reply_markup: { inline_keyboard: ma_send_request_in(String(from_user_id)) },
+      });
       await bot.sendMessage(from_telegram_chat_id, send_request_text);
       await ChatSelfController.createRequest(from_token || "", Number(from_user_id), to_user_id);
     }
   } else {
     if (data.status === 404) {
-      await bot.sendMessage(to_telegram_chat_id, recieved_request(from_username));
+      await bot.sendMessage(to_telegram_chat_id, recieved_request(from_username), {
+        reply_markup: { inline_keyboard: ma_send_request_in(String(from_user_id)) },
+      });
       await bot.sendMessage(from_telegram_chat_id, send_request_text);
       await ChatSelfController.createRequest(from_token || "", Number(from_user_id), to_user_id);
     }

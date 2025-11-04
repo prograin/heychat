@@ -67,11 +67,16 @@ ${careerSticker} <b>Career:</b> ${career}
 
 export function buildSearchQueryOptions(selectedFields: string[] | null, userProfile: Record<string, any> | any) {
   const mustClauses = [];
+  const shouldClauses = [];
 
   for (const fieldData of selectedFields || []) {
     const f: QueryFilter = JSON.parse(fieldData) as QueryFilter;
     if (["term", "terms"].includes(f.op)) {
-      mustClauses.push({ [f.op]: { [f.field]: f.value ?? userProfile[f.field] } });
+      if (f.field == "gender") {
+        shouldClauses.push({ [f.op]: { [f.field]: f.value ?? userProfile[f.field] } });
+      } else {
+        mustClauses.push({ [f.op]: { [f.field]: f.value ?? userProfile[f.field] } });
+      }
     } else if (["gt", "gte", "lt", "lte", "eq"].includes(f.op)) {
       if (f.op === "eq") {
         mustClauses.push({ term: { [f.field]: f.value ?? userProfile[f.field] } });
@@ -82,6 +87,11 @@ export function buildSearchQueryOptions(selectedFields: string[] | null, userPro
       return { error: `Unsupported operator: ${f.op}` };
     }
   }
-  const query = { bool: { must: mustClauses } };
+  const query = {
+    bool: {
+      must: mustClauses,
+      should: shouldClauses,
+    },
+  };
   return query;
 }

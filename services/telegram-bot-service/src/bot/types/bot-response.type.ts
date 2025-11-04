@@ -10,5 +10,17 @@ export default interface BotResponse {
 }
 
 export const botResponseDefault = {
-  user: { exists: false, id: null, permissions: { search: [] } },
+  user: {
+    exists: false,
+    id: null,
+    has_session: false,
+    partner: {
+      user_id: null,
+      telegram_id: null,
+      chat_id: null,
+    },
+    permissions: {
+      search: [],
+    },
+  },
 };

@@ -20,6 +20,25 @@ export class ChatSelfService {
     );
     return request;
   }
+
+  static async checkActiveSession(token: string) {
+    const request = await UserAxiosInstance.get(`http://${process.env.API_URL}:3006/chat/sessions/check/active/me`, { headers: { token: token } });
+    return request;
+  }
+
+  static async getActiveSession(token: string) {
+    const request = await UserAxiosInstance.get(`http://${process.env.API_URL}:3006/chat/sessions/me?active=true`, { headers: { token: token } });
+    return request;
+  }
+
+  static async updateSession(token: string, partner_id: number, status: string) {
+    const request = await UserAxiosInstance.put(
+      `http://${process.env.API_URL}:3006/chat/sessions/me`,
+      { partner_id, status },
+      { headers: { token: token } }
+    );
+    return request;
+  }
 }
 
 // export class ProfileAdminService {

@@ -104,7 +104,9 @@ export const searchMainReplyInit = async (bot: TelegramBot, event: BotEvent, res
     }
 
     if ("data" in event && "id" in event) {
-      await bot.answerCallbackQuery(event.id, { text: "An error occurred.", show_alert: true });
+      try {
+        await bot.answerCallbackQuery(event.id, { text: "An error occurred.", show_alert: true });
+      } catch (error) {}
     }
   }
 };
