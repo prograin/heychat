@@ -52,8 +52,8 @@ export class InlineCallback {
   static in_contact_remove_c = "RELATIONS::{userId}::removeContact";
   static in_block_c = "RELATIONS::{userId}::block";
   static in_unblock_c = "RELATIONS::{userId}::unblock";
-  static in_accept_request_c = "CHATS::{userId}::acceptRequest";
-  static in_decline_request_c = "CHATS::{userId}::declineRequest";
+  static in_accept_request_c = "CHAT::{userId}::acceptRequest";
+  static in_decline_request_c = "CHAT::{userId}::declineRequest";
 }
 
 export class InlineMeta {

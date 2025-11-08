@@ -108,7 +108,7 @@ export class ManageHandlers {
             return;
           }
 
-          if (data.startsWith("CHAT::") && data.endsWith("::send-request")) {
+          if (data.startsWith("CHAT::")) {
             await chat(bot, callbackQuery, response);
           } else if (data.startsWith("RELATIONS::")) {
             await relations(bot, callbackQuery, response);

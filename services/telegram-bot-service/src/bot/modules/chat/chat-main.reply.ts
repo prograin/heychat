@@ -37,7 +37,9 @@ export const chatMainReplyInit = async (bot: TelegramBot, event: BotEvent, respo
     }
 
     if ("data" in event) {
-      // await bot.answerCallbackQuery(event.id, { text: "An error occurred.", show_alert: true });
+      try {
+        await bot.answerCallbackQuery(event.id, { text: "An error occurred.", show_alert: true });
+      } catch (error) {}
     }
   }
 };
