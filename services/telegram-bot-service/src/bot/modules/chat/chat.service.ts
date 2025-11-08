@@ -21,6 +21,15 @@ export class ChatSelfService {
     return request;
   }
 
+  static async createSession(token: string, partner_id: number) {
+    const request = await UserAxiosInstance.post(
+      `http://${process.env.API_URL}:3006/chat/sessions/me`,
+      { partner_id },
+      { headers: { token: token } }
+    );
+    return request;
+  }
+
   static async checkActiveSession(token: string) {
     const request = await UserAxiosInstance.get(`http://${process.env.API_URL}:3006/chat/sessions/check/active/me`, { headers: { token: token } });
     return request;

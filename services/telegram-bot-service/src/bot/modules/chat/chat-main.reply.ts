@@ -3,6 +3,7 @@ import BotResponse from "src/bot/types/bot-response.type";
 import { BotEvent } from "src/bot/types/bot-event.type";
 import chatSendRequestReply from "./chat-send-request.reply";
 import chatForwardMessageReply from "./chat-forward-message.reply";
+import chatAcceptRequestReply from "./chat-accept-request.reply";
 
 const chatMainReplyMessage = async (bot: TelegramBot, message: Message, response: BotResponse) => {
   if (response.user.has_session) {
@@ -19,6 +20,10 @@ const chatMainReplyCallback = async (bot: TelegramBot, callbackQuery: CallbackQu
     case "send-request":
       await chatSendRequestReply(bot, callbackQuery, response.user, Number(callbackDataPart[callbackDataPart.length - 2]));
       break;
+
+    case "acceptRequest":
+      await chatAcceptRequestReply(bot, callbackQuery.message as Message, response);
+      break;
   }
 };
 
@@ -31,9 +36,12 @@ export const chatMainReplyInit = async (bot: TelegramBot, event: BotEvent, respo
     } else if ("text" in event) {
       await chatMainReplyMessage(bot, event, response);
     }
-  } catch (error) {
+  } catch (error: any) {
     if (chatId) {
-      await bot.sendMessage(chatId, "Something went wrong while processing your chat. Please try again.");
+      await bot.sendMessage(
+        chatId,
+        error.response?.data?.message || error.message || "Something went wrong while processing your chat. Please try again."
+      );
     }
 
     if ("data" in event) {
