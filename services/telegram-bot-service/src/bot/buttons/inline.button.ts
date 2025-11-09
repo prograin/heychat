@@ -25,6 +25,8 @@ export class InlineName {
   static in_unblock_n = "Unblock";
   static in_accept_request_n = "Accept";
   static in_decline_request_n = "Decline";
+  static in_end_chat_n = "End";
+  static in_cancel_n = "Cancel";
 }
 
 export class InlineCallback {
@@ -54,6 +56,8 @@ export class InlineCallback {
   static in_unblock_c = "RELATIONS::{userId}::unblock";
   static in_accept_request_c = "CHAT::{userId}::acceptRequest";
   static in_decline_request_c = "CHAT::{userId}::declineRequest";
+  static in_end_chat_c = "CHAT::{userId}::endChat";
+  static in_cancel_c = "CANCEL::";
 }
 
 export class InlineMeta {
@@ -194,5 +198,15 @@ export class InlineButton {
   static in_decline_request_b = {
     text: InlineName.in_decline_request_n,
     callback_data: InlineCallback.in_decline_request_c,
+  };
+
+  static in_end_chat_b = {
+    text: InlineName.in_end_chat_n,
+    callback_data: InlineCallback.in_end_chat_c,
+  };
+
+  static in_cancel_b = {
+    text: InlineName.in_cancel_n,
+    callback_data: InlineCallback.in_cancel_c,
   };
 }

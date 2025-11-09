@@ -16,6 +16,10 @@ export class ProfileSelfController {
     }
   };
 
+  static getUserProfileByUserId = async (token: string, userId: number) => {
+    return await ProfileUserService.getUserProfileByUserId(token, userId);
+  };
+
   static getProfiles = async (token: string, userIds: string[]) => {
     try {
       const profiles = await ProfileUserService.getProfiles(token, userIds);

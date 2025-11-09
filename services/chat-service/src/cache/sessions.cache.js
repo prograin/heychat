@@ -13,7 +13,7 @@ class SessionsCache {
   async getHasActiveSession(userId) {
     const key = PREFIX_KEY.chats.sessions.has_active.key(userId);
     let cached = await redis.get(key);
-    cached = cached ?? Boolean(cached);
+
     if (cached === null) return null;
     return cached === "true";
   }

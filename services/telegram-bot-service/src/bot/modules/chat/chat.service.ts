@@ -21,6 +21,18 @@ export class ChatSelfService {
     return request;
   }
 
+  static async updateRequest(token: string, senderId: number, recieverId: number, status: string) {
+    const request = await UserAxiosInstance.post(
+      `http://${process.env.API_URL}:3006/chat/requests`,
+      { sender_user_id: senderId, reciever_user_id: recieverId, status },
+      {
+        headers: { token: token },
+        validateStatus: (status) => status < 500,
+      }
+    );
+    return request;
+  }
+
   static async createSession(token: string, partner_id: number) {
     const request = await UserAxiosInstance.post(
       `http://${process.env.API_URL}:3006/chat/sessions/me`,
@@ -48,13 +60,10 @@ export class ChatSelfService {
     );
     return request;
   }
-}
 
-// export class ProfileAdminService {
-//   static async getProfileByUsername(username: string) {
-//     const profile = await AdminAxiosInstance.get(`http://localhost:3004/profiles/username/${username}`, {
-//       validateStatus: (status) => status < 500,
-//     });
-//     return profile;
-//   }
-// }
+  static checkUserActiveSession = async (token: string, userId: number) => {
+    return await UserAxiosInstance.get(`http://${process.env.API_URL}:3006/users/${userId}/chat/sessions/check/active`, {
+      headers: { token: token },
+    });
+  };
+}

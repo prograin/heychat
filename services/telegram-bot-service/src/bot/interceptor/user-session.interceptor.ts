@@ -8,6 +8,10 @@ import { UserAdminController } from "../modules/users/user.controller";
 export const userSessionInterceptor = async (event: BotEvent, response: BotResponse, next: Next) => {
   try {
     const token = response.user.token as string;
+    if (!token) {
+      await next();
+    }
+
     const checkActiveResponse = await ChatSelfController.checkActiveSession(token);
     const isActive = checkActiveResponse.data.isActive;
 

@@ -17,7 +17,6 @@ import { inlineButtonValidateInterceptor } from "../interceptor/inline-button-va
 import chat from "../modules/chat/chat-main.reply";
 import relations from "../modules/relations/relations-main.reply";
 import { KeyboardName } from "../buttons/keyboard.button";
-import { response } from "express";
 import { userSessionInterceptor } from "../interceptor/user-session.interceptor";
 import { noneCommandFilterInterceptor } from "../interceptor/none-command-filter.interceptor";
 
@@ -36,7 +35,7 @@ export class ManageHandlers {
       CommandExpression.c_start_exp,
       interceptorRunner(
         this.bot,
-        [fromValidateInterceptor, userTokenValidateInterceptor, userValidateInterceptor, userButtonClickedInterceptor],
+        [fromValidateInterceptor, userTokenValidateInterceptor, userValidateInterceptor, userSessionInterceptor, userButtonClickedInterceptor],
         start
       )
     );
@@ -78,6 +77,10 @@ export class ManageHandlers {
             case KeyboardName.ke_search_n:
               await search(this.bot, message, response);
               break;
+
+            case KeyboardName.ke_end_chat_n:
+              await chat(this.bot, message, response);
+              break;
           }
         }
       )
@@ -96,6 +99,7 @@ export class ManageHandlers {
           splitCallbackDataInterceptor,
           userPermissionsInterceptor,
           inlineButtonValidateInterceptor,
+          userSessionInterceptor,
         ],
         async (bot, event: BotEvent, response) => {
           const callbackQuery = event as CallbackQuery;

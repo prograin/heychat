@@ -12,10 +12,11 @@ export const createSessionController = async (req, res, next) => {
     const userId = req.params.userId || req.user.user_id;
     const partnerId = req.body.partner_id;
 
-    const session = await createSessionService(userId, partnerId);
+    await createSessionService(userId, partnerId);
+    await createSessionService(partnerId, userId);
+
     return res.status(201).json({
       message: "Session created successfully",
-      session,
     });
   } catch (error) {
     next(error);
@@ -57,10 +58,11 @@ export const updateSessionController = async (req, res, next) => {
     const partnerId = req.body.partner_id;
     const { status } = req.body;
 
-    const sessions = await updateSessionService(userId, partnerId, status);
+    await updateSessionService(userId, partnerId, status);
+    await updateSessionService(partnerId, userId, status);
+
     return res.status(200).json({
       message: "Session updated successfully",
-      sessions,
     });
   } catch (error) {
     next(error);

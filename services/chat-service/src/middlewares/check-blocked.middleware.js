@@ -2,8 +2,8 @@ import axios from "axios";
 
 export const checkBlockedMiddleware = async (req, res, next) => {
   try {
-    const requesterId = req.user.id;
-    const targetId = req.params.userId;
+    const requesterId = req.user.user_id;
+    const targetId = req.params.userId || req.body.partner_id;
 
     if (!targetId || requesterId === targetId) {
       return next();
@@ -20,6 +20,6 @@ export const checkBlockedMiddleware = async (req, res, next) => {
     next();
   } catch (error) {
     console.error("Block check error:", error.message);
-    return res.status(500).json({ error: "Failed to verify block status." });
+    return res.status(500).json({ message: "Failed to verify block status." });
   }
 };

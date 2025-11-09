@@ -4,8 +4,23 @@ import { BotEvent } from "src/bot/types/bot-event.type";
 import chatSendRequestReply from "./chat-send-request.reply";
 import chatForwardMessageReply from "./chat-forward-message.reply";
 import chatAcceptRequestReply from "./chat-accept-request.reply";
+import chatEndSessionReply from "./chat-end-session.reply";
+import { KeyboardName } from "src/bot/buttons/keyboard.button";
+import chatEndWarningSessionReply from "./chat-end-warning-session.reply";
+import chatDeclineRequestReply from "./chat-decline-request";
+import chatPartnerProfileReply from "./chat-partner-profile.reply";
 
 const chatMainReplyMessage = async (bot: TelegramBot, message: Message, response: BotResponse) => {
+  switch (message.text) {
+    case KeyboardName.ke_end_chat_n:
+      await chatEndWarningSessionReply(bot, message, response);
+      return;
+
+    case KeyboardName.ke_partner_profile_n:
+      await chatPartnerProfileReply(bot, message, response);
+      return;
+  }
+
   if (response.user.has_session) {
     await chatForwardMessageReply(bot, message, response);
     return;
@@ -18,11 +33,19 @@ const chatMainReplyCallback = async (bot: TelegramBot, callbackQuery: CallbackQu
 
   switch (lastPart) {
     case "send-request":
-      await chatSendRequestReply(bot, callbackQuery, response.user, Number(callbackDataPart[callbackDataPart.length - 2]));
+      await chatSendRequestReply(bot, callbackQuery, response, Number(callbackDataPart[callbackDataPart.length - 2]));
       break;
 
     case "acceptRequest":
       await chatAcceptRequestReply(bot, callbackQuery.message as Message, response);
+      break;
+
+    case "declineRequest":
+      await chatDeclineRequestReply(bot, callbackQuery.message as Message, response);
+      break;
+
+    case "endChat":
+      await chatEndSessionReply(bot, callbackQuery.message as Message, response);
       break;
   }
 };

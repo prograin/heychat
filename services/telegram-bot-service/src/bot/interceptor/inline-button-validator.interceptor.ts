@@ -7,8 +7,8 @@ import { ButtonsData } from "../buttons/constants.button";
 
 export const inlineButtonValidateInterceptor = async (event: BotEvent, response: BotResponse, next: Next) => {
   const rawData = response.callback?.data.raw || "";
-  const buttonData = ButtonsData[rawData] || {};
-  const shouldExpire = buttonData.should_expire ?? false;
+  const matchedButton = ButtonsData.find((btn) => btn.pattern.test(rawData));
+  const shouldExpire = matchedButton?.should_expire ?? false;
 
   if (!shouldExpire) {
     next();

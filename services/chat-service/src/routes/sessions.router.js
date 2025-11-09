@@ -15,7 +15,14 @@ import { checkBlockedMiddleware } from "../middlewares/check-blocked.middleware.
 export const topLevelSessionsRouter = express.Router();
 export const usersSessionsRouter = express.Router({ mergeParams: true });
 
-topLevelSessionsRouter.post("/me", authMiddleware, allowRole("admin", "user"), validateMiddleware(createSessionSchema), createSessionController);
+topLevelSessionsRouter.post(
+  "/me",
+  authMiddleware,
+  allowRole("admin", "user"),
+  checkBlockedMiddleware,
+  validateMiddleware(createSessionSchema),
+  createSessionController
+);
 topLevelSessionsRouter.get("/target/:targetId", authMiddleware, allowRole("admin", "user"), getSessionsByTargetController);
 topLevelSessionsRouter.get("/me", authMiddleware, allowRole("admin", "user"), getSessionsController);
 topLevelSessionsRouter.get("/check/active/me", authMiddleware, allowRole("admin", "user"), checkActiveSessionController);

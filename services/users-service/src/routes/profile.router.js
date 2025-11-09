@@ -12,8 +12,9 @@ import validateMiddleware from "../middlewares/validate.middleware.js";
 import { updateProfileSchema, createProfileSchema } from "../schemas/profile.schema.js";
 import { authMiddleware } from "../middlewares/auth.middleware.js";
 import { allowRole } from "../middlewares/allow-role.middleware.js";
+import { checkBlockedMiddleware } from "../middlewares/check-blocked.middleware.js";
 
-export const userProfileRouter = express.Router();
+export const userProfileRouter = express.Router({ mergeParams: true });
 export const topProfilesRouter = express.Router();
 
 // profile router doesn't use user_id and it does't blong to a specific user
@@ -37,7 +38,7 @@ topProfilesRouter.get("/username/:username", authMiddleware, allowRole("admin"),
 // DEL   /users/:userId/profile
 
 userProfileRouter.post("/", authMiddleware, allowRole("admin"), validateMiddleware(createProfileSchema), createProfileByUserIdController);
-userProfileRouter.get("/", authMiddleware, allowRole("admin"), getProfileByUserIdController);
+userProfileRouter.get("/", authMiddleware, allowRole("admin", "user"), checkBlockedMiddleware, getProfileByUserIdController);
 userProfileRouter.delete("/", authMiddleware, allowRole("admin"), deleteProfileByUserIdController);
 
 // --------------------------

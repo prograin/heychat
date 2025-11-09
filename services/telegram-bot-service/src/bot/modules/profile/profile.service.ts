@@ -9,6 +9,12 @@ export class ProfileUserService {
     return profile;
   }
 
+  static async getUserProfileByUserId(token: string, userId: number) {
+    return await UserAxiosInstance.get(`http://${process.env.API_URL}:3004/users/${userId}/profile`, {
+      headers: { token: token },
+    });
+  }
+
   static async getProfiles(token: string, userIds: string[]) {
     const profile = await UserAxiosInstance.get(`http://${process.env.API_URL}:3004/profiles`, {
       headers: { token: token },

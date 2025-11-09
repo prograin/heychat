@@ -31,6 +31,10 @@ export class ChatSelfController {
     }
   };
 
+  static updateRequest = async (token: string, senderId: number, recieverId: number, status: string) => {
+    return await ChatSelfService.updateRequest(token, senderId, recieverId, status);
+  };
+
   static createSession = async (token: string, partner_id: number) => {
     return await ChatSelfService.createSession(token, partner_id);
   };
@@ -45,5 +49,9 @@ export class ChatSelfController {
 
   static updateSession = async (token: string, partner_id: number, status: string) => {
     return await ChatSelfService.updateSession(token, partner_id, status);
+  };
+
+  static checkUserActiveSession = async (token: string, user_id: number) => {
+    return await ChatSelfService.checkUserActiveSession(token, user_id);
   };
 }
