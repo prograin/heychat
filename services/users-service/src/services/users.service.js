@@ -15,15 +15,24 @@ import userProducer from "../events/producers/user.producer.js";
  * @param {Object} data
  * @returns {Promise<Object>}
  */
-export const createUserService = async (data) => {
-  const existingUser = await getUser(data.id);
+export const createUserService = async (data, force) => {
+  const existingUser = await getUserByTelegramIdService(data.telegram_id);
 
   if (existingUser) {
-    const value = await validateUtil(usersResponseSchema, existingUser.toJSON(), false, true);
-    await UsersCache.addUser(existingUser.id, value);
-    const error = new Error("User already exists");
-    error.status = 409;
-    throw error;
+    if (force) {
+      profile = await createProfileService({ user_id: Number(existingUser.id), username: existingUser.id });
+      await userProducer.publishUserAdded(existingUser.id, { user_id: existingUser.id, username: existingUser.id });
+      const value = await validateUtil(usersResponseSchema, existingUser.toJSON(), false, true);
+      await UsersCache.addUser(existingUser.id, value);
+
+      return value;
+    } else {
+      const value = await validateUtil(usersResponseSchema, existingUser.toJSON(), false, true);
+      await UsersCache.addUser(existingUser.id, value);
+      const error = new Error("User already exists");
+      error.status = 409;
+      throw error;
+    }
   }
 
   const cleaned = dropNullFields(data);
@@ -37,6 +46,7 @@ export const createUserService = async (data) => {
     await userProducer.publishUserAdded(user.id, { user_id: user.id, username: user.id });
   } catch (err) {
     if (user) await deleteUser(user.id);
+    await userProducer.publishUserDeleted(user.id, { user_id: user.id });
     throw err;
   }
 

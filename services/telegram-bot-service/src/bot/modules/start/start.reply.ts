@@ -25,6 +25,10 @@ export default async (bot: TelegramBot, event: BotEvent, response: Response) => 
 
   try {
     if (response.user.exists) {
+      // if (!response.user.profile) {
+      //   await UserAdminController.createUser(usersTelegramData, true);
+      // }
+
       const options = response.user.has_session ? { reply_markup: { keyboard: ma_accept_request_ke } } : { reply_markup: ma_main_ke };
 
       await bot.sendMessage(chatId, welcome_back_text(firstName), options);

@@ -18,8 +18,8 @@ export class UserSelfController {
 }
 
 export class UserAdminController {
-  static createUser = async (data: object) => {
-    const user = await UserAdminService.createUser(data);
+  static createUser = async (data: object, force: boolean = false) => {
+    const user = await UserAdminService.createUser(data, force);
     if ([201, 409].includes(user.status)) {
       return user;
     } else {

@@ -10,8 +10,8 @@ export class UserSelfService {
 }
 
 export class UserAdminService {
-  static createUser = async (data: object) => {
-    return await AdminAxiosInstance.post(`http://${process.env.API_URL}:3004/users/`, data, {
+  static createUser = async (data: object, force: boolean) => {
+    return await AdminAxiosInstance.post(`http://${process.env.API_URL}:3004/users?force=${force}`, data, {
       validateStatus: (status) => status < 500,
     });
   };

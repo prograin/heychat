@@ -1,7 +1,7 @@
 import BotResponse from "src/bot/types/bot-response.type";
 import { Next } from "src/bot/types/next.type";
 import { BotEvent } from "src/bot/types/bot-event.type";
-import { UserAdminController, UserSelfController } from "src/bot/modules/users/user.controller";
+import { UserAdminController } from "src/bot/modules/users/user.controller";
 import { generateUserToken } from "src/api/utils/auth.util";
 import { setUserToken } from "src/api/cache/auth.cache";
 import { setMapTelegramToUser, setMapUserToTelegram } from "../modules/users/user.cache";
@@ -19,7 +19,7 @@ export const userValidateInterceptor = async (event: BotEvent, response: BotResp
 
     if (!result.error) {
       const token = await generateUserToken({
-        user_id: Number(response.user.id),
+        user_id: Number(result.data.id),
         telegram_id: userTelegramId,
         role: "user",
       });

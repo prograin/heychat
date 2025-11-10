@@ -4,7 +4,8 @@ import { getUserByTelegramIdService, createUserService, getUserService, deleteUs
 export const postUserController = async (req, res, next) => {
   try {
     const data = req.validatedBody;
-    const user = await createUserService(data);
+    const force = req.query.force || false;
+    const user = await createUserService(data, force);
 
     res.status(201).json(user);
   } catch (error) {

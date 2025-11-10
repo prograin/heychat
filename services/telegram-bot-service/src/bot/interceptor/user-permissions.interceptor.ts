@@ -17,7 +17,7 @@ export const userPermissionsInterceptor = async (event: BotEvent, response: BotR
         await bot.answerCallbackQuery(event.id, { text: "Profile Not Found .", show_alert: true });
       }
     } catch {}
-    await bot.sendMessage(chatId as number, "/start");
+    await bot.sendMessage(chatId as number, "Please /start and try again");
     return;
   }
 
