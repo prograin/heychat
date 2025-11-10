@@ -16,7 +16,7 @@ import userProducer from "../events/producers/user.producer.js";
  * @returns {Promise<Object>}
  */
 export const createUserService = async (data, force) => {
-  const existingUser = await getUserByTelegramIdService(data.telegram_id);
+  const existingUser = await getUserByTelegramId(data.telegram_id);
 
   if (existingUser) {
     if (force) {

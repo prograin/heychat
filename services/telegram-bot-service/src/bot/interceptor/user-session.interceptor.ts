@@ -10,6 +10,7 @@ export const userSessionInterceptor = async (event: BotEvent, response: BotRespo
     const token = response.user.token as string;
     if (!token) {
       await next();
+      return;
     }
 
     const checkActiveResponse = await ChatSelfController.checkActiveSession(token);

@@ -13,7 +13,6 @@ export const generateUserToken = async (payload: PayloadType) => {
   const token = jwt.sign(payload, secret, { expiresIn: "30d" });
   await setUserToken(payload.user_id, token);
 
-  console.log(token);
   return token;
 };
 
