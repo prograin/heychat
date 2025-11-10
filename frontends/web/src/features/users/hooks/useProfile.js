@@ -32,7 +32,9 @@ export default function useProfile() {
         setUser(data);
         setOriginalUser(data);
       } catch (err) {
-        setError("Failed to load profile");
+        console.log(err);
+        const errorMessage = err.response?.data?.message || "Failed to load profile";
+        setError(errorMessage);
       } finally {
         setLoading(false);
       }

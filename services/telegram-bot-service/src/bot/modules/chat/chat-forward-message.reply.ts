@@ -1,4 +1,4 @@
-import TelegramBot, { CallbackQuery, Message } from "node-telegram-bot-api";
+import TelegramBot, { Message } from "node-telegram-bot-api";
 import BotResponse from "src/bot/types/bot-response.type";
 import { ma_accept_request_ke } from "./chat.markup";
 

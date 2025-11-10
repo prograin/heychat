@@ -8,7 +8,7 @@ import "./shared/styles/variables.css";
 import "./shared/styles/theme.css";
 import "./shared/styles/animations.css";
 
-if (import.meta.env.NODE_ENV == "development") {
+if (import.meta.env.VITE_NODE_ENV == "development") {
   localStorage.setItem("token", import.meta.env.VITE_USER_TEST_TOKEN);
 }
 

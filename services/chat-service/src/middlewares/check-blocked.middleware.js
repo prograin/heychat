@@ -3,10 +3,10 @@ import axios from "axios";
 export const checkBlockedMiddleware = async (req, res, next) => {
   try {
     const requesterId = req.user.user_id;
-    const targetId = req.params.userId || req.body.partner_id;
+    const targetId = req.params.userId || req.params.targetId || req.body.partner_id;
 
-    if (!targetId || requesterId === targetId) {
-      return next();
+    if (!targetId || requesterId == targetId) {
+      return res.status(403).json({ message: "Something went wrong. Please try again." });
     }
 
     const response = await axios.get(`http://${process.env.API_URL}:3007/relations/blocks/check/${targetId}`, {
@@ -14,7 +14,7 @@ export const checkBlockedMiddleware = async (req, res, next) => {
     });
 
     if (response.data?.isBlocked) {
-      return res.status(403).json({ error: "You are blocked by this user." });
+      return res.status(403).json({ message: "You are blocked by this user." });
     }
 
     next();

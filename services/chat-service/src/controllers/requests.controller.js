@@ -3,12 +3,13 @@ import requestsCache from "../cache/requests.cache.js";
 
 export const createOrUpdateController = async (req, res, next) => {
   try {
-    const { sender_user_id, reciever_user_id, status } = req.body;
+    const sender_user_id = req.params.user_id || req.user?.user_id;
+    const { reciever_user_id, status } = req.body;
 
     if (!sender_user_id || !reciever_user_id) {
       return res.status(400).json({
         success: false,
-        message: "Both sender_user_id and reciever_user_id are required.",
+        message: "reciever_user_id are required.",
       });
     }
 

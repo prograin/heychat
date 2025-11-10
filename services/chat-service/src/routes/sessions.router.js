@@ -11,6 +11,7 @@ import {
   updateSessionController,
 } from "../controllers/sessions.controller.js";
 import { checkBlockedMiddleware } from "../middlewares/check-blocked.middleware.js";
+import { checkPendingRequestMiddleware } from "../middlewares/check-pending-request.middleware.js";
 
 export const topLevelSessionsRouter = express.Router();
 export const usersSessionsRouter = express.Router({ mergeParams: true });
@@ -19,8 +20,9 @@ topLevelSessionsRouter.post(
   "/me",
   authMiddleware,
   allowRole("admin", "user"),
-  checkBlockedMiddleware,
   validateMiddleware(createSessionSchema),
+  checkBlockedMiddleware,
+  checkPendingRequestMiddleware,
   createSessionController
 );
 topLevelSessionsRouter.get("/target/:targetId", authMiddleware, allowRole("admin", "user"), getSessionsByTargetController);
