@@ -18,13 +18,16 @@ export const userValidateInterceptor = async (event: BotEvent, response: BotResp
     result = await UserAdminController.getUserByTelegramId(BigInt(userTelegramId));
 
     if (!result.error) {
-      response.user.exists = true;
-      response.user.id = result.data.id;
       const token = await generateUserToken({
         user_id: Number(response.user.id),
         telegram_id: userTelegramId,
         role: "user",
       });
+
+      response.user.exists = true;
+      response.user.id = result.data.id;
+      response.user.token = token;
+
       await setMapTelegramToUser(userTelegramId, Number(response.user.id));
       await setMapUserToTelegram(userTelegramId, Number(response.user.id));
       await setUserToken(Number(response.user.id), token);

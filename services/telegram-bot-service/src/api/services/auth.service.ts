@@ -16,8 +16,8 @@ dotenv.config({ path: ".telegram.env" });
 export const authService = async (data: Record<string, string | number>) => {
   if (!verifyTelegramAuth(data)) {
     const error = new Error(
-      "Telegram authentication failed: the provided data is invalid or has been tampered with. " +
-        "Please ensure you are logging in with the same Telegram account that joined the bot."
+      "Oops! It seems the data is invalid or has been modified. " +
+        "Please make sure you're logging in with the same Telegram account you used to join the bot."
     ) as Error & { statusCode?: number };
     error.statusCode = 401;
     throw error;
