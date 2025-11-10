@@ -4,19 +4,20 @@ import { BotEvent } from "src/bot/types/bot-event.type";
 import { filedsForSearch } from "../modules/search/search.constants";
 import { ProfileSelfController } from "../modules/profile/profile.controller";
 import { bot } from "src/bot-entry";
-import { CallbackQuery } from "node-telegram-bot-api";
+import { CallbackQuery, Message } from "node-telegram-bot-api";
 
 export const userPermissionsInterceptor = async (event: BotEvent, response: BotResponse, next: Next) => {
-  const callbackQuery = event as CallbackQuery;
-  const cahtId = callbackQuery.message?.chat.id as number;
+  const chatId = "chat" in event ? event.chat.id : event.message?.chat.id;
   const token = response.user.token;
   const profileResponse = await ProfileSelfController.getProfile(token as string);
 
   if (profileResponse.error) {
     try {
-      await bot.answerCallbackQuery(callbackQuery.id, { text: "Profile Not Found .", show_alert: true });
+      if ("data" in event) {
+        await bot.answerCallbackQuery(event.id, { text: "Profile Not Found .", show_alert: true });
+      }
     } catch {}
-    await bot.sendMessage(cahtId, "/start");
+    await bot.sendMessage(chatId as number, "/start");
     return;
   }
 
