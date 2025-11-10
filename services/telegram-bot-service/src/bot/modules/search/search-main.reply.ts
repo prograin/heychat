@@ -39,7 +39,7 @@ const searchMainReplyCallback = async (
   const lastPart = callbackDataPart[callbackDataPart.length - 1];
   switch (lastPart) {
     case "":
-      await searchBaseReply(bot, callbackQuery.message, true, telegramSearchData, searchPermission);
+      await searchBaseReply(bot, callbackQuery.message, false, telegramSearchData, searchPermission);
       await setUserTelegramSearch(Number(response.user.id), Number(callbackQuery.message?.message_id), telegramSearchData);
       break;
 
