@@ -46,7 +46,7 @@ export function AuthProvider({ children }) {
   return (
     <AuthContext.Provider value={{ user, token, login, logout }}>
       {children}
-      <InfoAlert open={showLogoutAlert} onClose={() => setShowLogoutAlert(false)} message={logoutMessage} />
+      <InfoAlert open={showLogoutAlert} onClose={() => setShowLogoutAlert(false)} message={logoutMessage} title="Logged Out" />
     </AuthContext.Provider>
   );
 }
