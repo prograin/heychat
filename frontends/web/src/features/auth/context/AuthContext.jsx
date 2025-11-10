@@ -18,8 +18,7 @@ export function AuthProvider({ children }) {
         .then((res) => (res.ok ? res.json() : null))
         .then((data) => setUser(data))
         .catch(() => {
-          setToken(null);
-          localStorage.removeItem("token");
+          logout();
         });
     }
   }, [token]);
