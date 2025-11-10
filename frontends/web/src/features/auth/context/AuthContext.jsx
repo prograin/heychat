@@ -1,4 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { clearTelegramCookies } from "../utils/telegramCookie.util.js";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext(null);
 
@@ -31,7 +33,11 @@ export function AuthProvider({ children }) {
   const logout = () => {
     setToken(null);
     setUser(null);
+
     localStorage.removeItem("token");
+    localStorage.removeItem("telegramOAuth");
+
+    clearTelegramCookies();
   };
 
   return <AuthContext.Provider value={{ user, token, login, logout }}>{children}</AuthContext.Provider>;

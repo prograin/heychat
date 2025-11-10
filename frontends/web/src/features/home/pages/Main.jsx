@@ -1,15 +1,12 @@
 import React from "react";
+import { useAuthContext } from "../../auth/context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 export default function MainHomePage() {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("telegram_oauth");
-    navigate("/");
-  };
+  const { logout } = useAuthContext();
 
   return (
     <div
@@ -38,7 +35,7 @@ export default function MainHomePage() {
                        rounded-md border-2 border-transparent
                        hover:border-gradient-to-r hover:from-purple-400 hover:via-pink-400 hover:to-red-400
                        transition-all duration-300 hover:scale-105"
-            onClick={handleLogout}
+            onClick={logout}
           >
             Logout
           </button>

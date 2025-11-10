@@ -3,7 +3,7 @@ import { useAuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 export default function TelegramLoginWidget() {
-  const { login } = useAuthContext();
+  const { login, logout } = useAuthContext();
   const navigate = useNavigate();
   const containerRef = useRef(null);
 
@@ -29,8 +29,7 @@ export default function TelegramLoginWidget() {
       login(token, userData);
       navigate("/user/profile");
     } catch (err) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("telegramOAuth");
+      logout();
 
       setError(err.message);
       setShowModal(true);

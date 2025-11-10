@@ -1,19 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../auth/context/AuthContext";
 
 export default function ModernHeader() {
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    // Remove stored token
-    localStorage.removeItem("token");
-
-    // Remove Telegram authentication (adjust key if needed)
-    localStorage.removeItem("telegramAuth");
-
-    // Redirect to home page
-    navigate("/");
-  };
+  const { logout } = useAuthContext();
 
   return (
     <header
@@ -31,7 +23,7 @@ export default function ModernHeader() {
 
       {/* Logout button on the right */}
       <button
-        onClick={handleLogout}
+        onClick={logout}
         className="bg-red-500 text-white px-4 py-2 rounded-md 
                    hover:bg-red-600 transition-colors duration-300"
       >
