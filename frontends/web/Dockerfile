@@ -40,7 +40,7 @@ COPY shared /usr/hey-app/shared
 EXPOSE 4173
 
 # Environment variables
-ENV NODE_ENV=production
+ENV VITE_NODE_ENV=production
 ENV API_URL=host.docker.internal
 
 # Run the preview server
