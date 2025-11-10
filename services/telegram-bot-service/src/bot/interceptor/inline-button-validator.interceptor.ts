@@ -18,11 +18,12 @@ export const inlineButtonValidateInterceptor = async (event: BotEvent, response:
     const messageTime = callbackQuery.message!.date;
     const secondsPassed = now - messageTime;
     if (secondsPassed > 300) {
-      bot.answerCallbackQuery(callbackQuery.id, {
-        show_alert: true,
-        text: "⚠️ This button has expired. Please start a new to continue.",
-      });
       try {
+        bot.answerCallbackQuery(callbackQuery.id, {
+          show_alert: true,
+          text: "⚠️ This button has expired. Please start a new to continue.",
+        });
+
         await bot.deleteMessage(callbackQuery.message!.chat.id, callbackQuery.message!.message_id);
       } catch (err: any) {}
       return;

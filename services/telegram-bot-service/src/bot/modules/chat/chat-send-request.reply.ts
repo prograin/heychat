@@ -34,7 +34,9 @@ async function chatSendRequestReply(bot: TelegramBot, callbackQuery: CallbackQue
     const elapsed = now - updated_at;
 
     if (elapsed < THRESHOLD) {
-      await bot.answerCallbackQuery(callbackQuery.id, { text: requests_was_sent_text(elapsed, THRESHOLD - elapsed), show_alert: true });
+      try {
+        await bot.answerCallbackQuery(callbackQuery.id, { text: requests_was_sent_text(elapsed, THRESHOLD - elapsed), show_alert: true });
+      } catch {}
     } else {
       await bot.sendMessage(to_telegram_chat_id, recieved_request(from_username), {
         reply_markup: { inline_keyboard: ma_send_request_in(String(from_user_id)) },

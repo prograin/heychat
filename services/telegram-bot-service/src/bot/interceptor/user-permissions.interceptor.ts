@@ -13,7 +13,9 @@ export const userPermissionsInterceptor = async (event: BotEvent, response: BotR
   const profileResponse = await ProfileSelfController.getProfile(token as string);
 
   if (profileResponse.error) {
-    await bot.answerCallbackQuery(callbackQuery.id, { text: "Profile Not Found .", show_alert: true });
+    try {
+      await bot.answerCallbackQuery(callbackQuery.id, { text: "Profile Not Found .", show_alert: true });
+    } catch {}
     await bot.sendMessage(cahtId, "/start");
     return;
   }
