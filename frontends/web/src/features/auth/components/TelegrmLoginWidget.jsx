@@ -40,7 +40,7 @@ export default function TelegramLoginWidget() {
     const script = document.createElement("script");
     script.src = "https://telegram.org/js/telegram-widget.js?15";
     script.async = true;
-    script.setAttribute("data-telegram-login", "ENGLISH_CHAT_AI_bot");
+    script.setAttribute("data-telegram-login", "HEYCHAT_fa_bot");
     script.setAttribute("data-size", "large");
     script.setAttribute("data-userpic", "false");
     script.setAttribute("data-request-access", "write");
