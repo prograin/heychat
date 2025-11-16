@@ -1,3 +1,27 @@
+import { flattenObject } from "src/bot/utils/object";
+
+import countriesData from "../../../../../../shared/data/countries.json";
+import statesData from "../../../../../../shared/data/states.json";
+import citiesData from "../../../../../../shared/data/cities.json";
+import { INTEREST_VALUES } from "../../../../../../shared/constants/interests";
+import { map } from "zod";
+
+type DataItem = { value: number; label: string };
+
+const states = statesData as Record<string, DataItem[]>;
+const countries = countriesData as Array<DataItem>;
+const cities = citiesData as Record<string, DataItem[]>;
+
+export const allLabelCountries = countries.map((item) => item.label);
+
+export const allLabelCities = Object.values(cities)
+  .flat()
+  .map((item) => item.label);
+
+export const allLabelStates = Object.values(states)
+  .flat()
+  .map((item) => item.label);
+
 export function buildProfileText(profile: any) {
   const missing = "❓";
 
@@ -33,4 +57,46 @@ ${careerSticker} <b>Career:</b> ${career}
   }
 
   return profileText;
+}
+
+export function getMapInterests(selectedValues: Array<any>) {
+  const safeValues = selectedValues ?? [];
+  const mapped_interests_values = INTEREST_VALUES.map((interest) => (safeValues.includes(interest) ? `✔️ ${interest}` : interest));
+  return mapped_interests_values;
+}
+
+export function getCountries() {
+  return countries.map((item) => item.label);
+}
+
+export function getStates(countryLabel: any) {
+  const countryId = getCountryBySource("label", countryLabel);
+  return states[countryId] || [];
+}
+
+export function getCities(stateId: number) {
+  return cities[stateId] || [];
+}
+
+export function getCityBySource(source: string, value: string | number) {
+  const allCities = flattenObject(cities);
+  return findBySource(allCities, source, value);
+}
+
+export function getStateBySource(source: string, value: string | number) {
+  const allStates = flattenObject(states);
+  return findBySource(allStates, source, value);
+}
+
+export function getCountryBySource(source: string, value: string | number) {
+  const allCountries = countries.flat();
+  return findBySource(allCountries, source, value);
+}
+
+function findBySource(list: Array<any>, source: string, value: string | number) {
+  if (source == "value") {
+    return (list.find((item) => item[source] == value) || {}).label || null;
+  } else if (source == "label") {
+    return (list.find((item) => item[source] == value) || {}).value || null;
+  }
 }

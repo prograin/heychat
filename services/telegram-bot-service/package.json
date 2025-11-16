@@ -23,7 +23,8 @@
     "module-alias": "^2.2.3",
     "node-telegram-bot-api": "^0.66.0",
     "redis": "^5.8.2",
-    "socks-proxy-agent": "^8.0.5"
+    "socks-proxy-agent": "^8.0.5",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@types/express": "^5.0.3",

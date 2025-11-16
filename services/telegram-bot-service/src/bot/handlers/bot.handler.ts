@@ -118,16 +118,23 @@ export class ManageHandlers {
             await relations(bot, callbackQuery, response);
           } else {
             switch (data) {
+              case InlineCallback.in_edit_on_telegram_c:
+              case InlineCallback.in_edit_age_on_telegram_c:
+              case InlineCallback.in_edit_career_on_telegram_c:
+              case InlineCallback.in_edit_city_on_telegram_c:
+              case InlineCallback.in_edit_country_on_telegram_c:
+              case InlineCallback.in_edit_state_on_telegram_c:
+              case InlineCallback.in_edit_gender_on_telegram_c:
+              case InlineCallback.in_edit_interests_on_telegram_c:
+              case InlineCallback.in_edit_firstname_on_telegram_c:
+              case InlineCallback.in_edit_lastname_on_telegram_c:
+              case InlineCallback.in_edit_on_telegram_c:
               case InlineCallback.in_profile_c:
                 await profile(this.bot, callbackQuery, response);
                 break;
 
               case InlineCallback.in_random_chat_c:
                 console.log("start search");
-                break;
-
-              case InlineCallback.in_edit_c:
-                console.log("edit profile");
                 break;
 
               case InlineCallback.in_search_c:

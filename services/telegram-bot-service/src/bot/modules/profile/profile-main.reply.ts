@@ -1,18 +1,20 @@
-import TelegramBot, { CallbackQuery, Message, ParseMode } from "node-telegram-bot-api";
-import { ma_profile_in } from "./profile.markup";
-import BotResponse from "src/bot/types/bot-response.type";
 import { BotEvent } from "src/bot/types/bot-event.type";
-import { ProfileSelfController } from "./profile.controller";
-import { buildProfileText } from "./profile.helper";
-import profileMe from "./profile-me.reply";
 import { KeyboardName } from "src/bot/buttons/keyboard.button";
+import TelegramBot, { CallbackQuery, Message } from "node-telegram-bot-api";
+import BotResponse from "src/bot/types/bot-response.type";
+import profileMe from "./profile-me.reply";
+import editProfile from "./profile-edit.reply";
 
 const profileMainReplyCallback = async (bot: TelegramBot, callbackQuery: CallbackQuery, response: BotResponse) => {
   const lastPart = response.callback?.data.parts.at(-1);
 
   switch (lastPart) {
+    case "editOnTelegram":
+      await editProfile(bot, callbackQuery.message as Message, response);
+      break;
     case "me":
       await profileMe(bot, callbackQuery.message as Message, response);
+      break;
   }
 };
 
@@ -22,6 +24,7 @@ export const profileMainReplyMessage = async (bot: TelegramBot, message: Message
   switch (keyboard) {
     case KeyboardName.ke_profile_n:
       await profileMe(bot, message, response);
+      break;
   }
 };
 
@@ -33,9 +36,12 @@ export default async (bot: TelegramBot, event: BotEvent, response: BotResponse) 
     } else if ("text" in event) {
       await profileMainReplyMessage(bot, event, response);
     }
-  } catch (error) {
+  } catch (error: any) {
     if (chatId) {
-      await bot.sendMessage(chatId, "Something went wrong while processing your profile. Please try again.");
+      await bot.sendMessage(
+        chatId,
+        error.response?.data?.message || error.message || "Something went wrong while processing your profile. Please try again."
+      );
     }
   }
 };

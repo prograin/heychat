@@ -23,6 +23,10 @@ export class ProfileUserService {
     });
     return profile;
   }
+
+  static async updateProfile(token: string, data: Record<any, any>) {
+    return await UserAxiosInstance.put("http://${process.env.API_URL}:3004/profiles/me", data, { headers: { token: token } });
+  }
 }
 
 export class ProfileAdminService {

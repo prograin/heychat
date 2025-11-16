@@ -85,6 +85,11 @@ export const PREFIX_KEY = {
       token: {
         key: (value) => `user:telegram:token:${value}`,
       },
+      profile: {
+        edit: {
+          key: (value) => `user:telegram:profile:edit:${value}`,
+        },
+      },
       search: {
         key: (value1, value2) => `user:telegram:search:${value1}:${value2}`,
       },

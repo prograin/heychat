@@ -1,0 +1,1022 @@
+{
+  "1": [
+    {
+      "value": 3901,
+      "label": "Badakhshan"
+    },
+    {
+      "value": 3871,
+      "label": "Badghis"
+    },
+    {
+      "value": 3875,
+      "label": "Baghlan"
+    },
+    {
+      "value": 3884,
+      "label": "Balkh"
+    },
+    {
+      "value": 3872,
+      "label": "Bamyan"
+    },
+    {
+      "value": 3892,
+      "label": "Daykundi"
+    },
+    {
+      "value": 3899,
+      "label": "Farah"
+    },
+    {
+      "value": 3889,
+      "label": "Faryab"
+    },
+    {
+      "value": 3870,
+      "label": "Ghazni"
+    },
+    {
+      "value": 3888,
+      "label": "Ghōr"
+    },
+    {
+      "value": 3873,
+      "label": "Helmand"
+    },
+    {
+      "value": 3887,
+      "label": "Herat"
+    },
+    {
+      "value": 3886,
+      "label": "Jowzjan"
+    },
+    {
+      "value": 3902,
+      "label": "Kabul"
+    },
+    {
+      "value": 3890,
+      "label": "Kandahar"
+    },
+    {
+      "value": 3879,
+      "label": "Kapisa"
+    },
+    {
+      "value": 3878,
+      "label": "Khost"
+    },
+    {
+      "value": 3876,
+      "label": "Kunar"
+    },
+    {
+      "value": 3900,
+      "label": "Kunduz Province"
+    },
+    {
+      "value": 3891,
+      "label": "Laghman"
+    },
+    {
+      "value": 3897,
+      "label": "Logar"
+    },
+    {
+      "value": 3882,
+      "label": "Nangarhar"
+    },
+    {
+      "value": 3896,
+      "label": "Nimruz"
+    },
+    {
+      "value": 3880,
+      "label": "Nuristan"
+    },
+    {
+      "value": 3894,
+      "label": "Paktia"
+    },
+    {
+      "value": 3877,
+      "label": "Paktika"
+    },
+    {
+      "value": 3881,
+      "label": "Panjshir"
+    },
+    {
+      "value": 3895,
+      "label": "Parwan"
+    },
+    {
+      "value": 3883,
+      "label": "Samangan"
+    },
+    {
+      "value": 3885,
+      "label": "Sar-e Pol"
+    },
+    {
+      "value": 3893,
+      "label": "Takhar"
+    },
+    {
+      "value": 3898,
+      "label": "Urozgan"
+    },
+    {
+      "value": 3874,
+      "label": "Zabul"
+    }
+  ],
+  "12": [
+    {
+      "value": 2023,
+      "label": "Aragatsotn"
+    },
+    {
+      "value": 2024,
+      "label": "Ararat"
+    },
+    {
+      "value": 2026,
+      "label": "Armavir"
+    },
+    {
+      "value": 2028,
+      "label": "Gegharkunik"
+    },
+    {
+      "value": 2033,
+      "label": "Kotayk"
+    },
+    {
+      "value": 2029,
+      "label": "Lori"
+    },
+    {
+      "value": 2031,
+      "label": "Shirak"
+    },
+    {
+      "value": 2027,
+      "label": "Syunik"
+    },
+    {
+      "value": 2032,
+      "label": "Tavush"
+    },
+    {
+      "value": 2025,
+      "label": "Vayots Dzor"
+    },
+    {
+      "value": 2030,
+      "label": "Yerevan"
+    }
+  ],
+  "45": [
+    {
+      "value": 2251,
+      "label": "Anhui"
+    },
+    {
+      "value": 2257,
+      "label": "Beijing"
+    },
+    {
+      "value": 2271,
+      "label": "Chongqing"
+    },
+    {
+      "value": 2248,
+      "label": "Fujian"
+    },
+    {
+      "value": 2275,
+      "label": "Gansu"
+    },
+    {
+      "value": 2279,
+      "label": "Guangdong"
+    },
+    {
+      "value": 2278,
+      "label": "Guangxi Zhuang"
+    },
+    {
+      "value": 2261,
+      "label": "Guizhou"
+    },
+    {
+      "value": 2273,
+      "label": "Hainan"
+    },
+    {
+      "value": 2280,
+      "label": "Hebei"
+    },
+    {
+      "value": 2265,
+      "label": "Heilongjiang"
+    },
+    {
+      "value": 2259,
+      "label": "Henan"
+    },
+    {
+      "value": 2267,
+      "label": "Hong Kong SAR"
+    },
+    {
+      "value": 2274,
+      "label": "Hubei"
+    },
+    {
+      "value": 2258,
+      "label": "Hunan"
+    },
+    {
+      "value": 2269,
+      "label": "Inner Mongolia"
+    },
+    {
+      "value": 2250,
+      "label": "Jiangsu"
+    },
+    {
+      "value": 2256,
+      "label": "Jiangxi"
+    },
+    {
+      "value": 2253,
+      "label": "Jilin"
+    },
+    {
+      "value": 2268,
+      "label": "Liaoning"
+    },
+    {
+      "value": 2266,
+      "label": "Macau SAR"
+    },
+    {
+      "value": 2262,
+      "label": "Ningxia Huizu"
+    },
+    {
+      "value": 2270,
+      "label": "Qinghai"
+    },
+    {
+      "value": 2272,
+      "label": "Shaanxi"
+    },
+    {
+      "value": 2252,
+      "label": "Shandong"
+    },
+    {
+      "value": 2249,
+      "label": "Shanghai"
+    },
+    {
+      "value": 2254,
+      "label": "Shanxi"
+    },
+    {
+      "value": 2277,
+      "label": "Sichuan"
+    },
+    {
+      "value": 2255,
+      "label": "Taiwan"
+    },
+    {
+      "value": 2276,
+      "label": "Tianjin"
+    },
+    {
+      "value": 2263,
+      "label": "Xinjiang"
+    },
+    {
+      "value": 2264,
+      "label": "Xizang"
+    },
+    {
+      "value": 2260,
+      "label": "Yunnan"
+    },
+    {
+      "value": 2247,
+      "label": "Zhejiang"
+    }
+  ],
+  "101": [
+    {
+      "value": 4023,
+      "label": "Andaman and Nicobar Islands"
+    },
+    {
+      "value": 4017,
+      "label": "Andhra Pradesh"
+    },
+    {
+      "value": 4024,
+      "label": "Arunachal Pradesh"
+    },
+    {
+      "value": 4027,
+      "label": "Assam"
+    },
+    {
+      "value": 4037,
+      "label": "Bihar"
+    },
+    {
+      "value": 4031,
+      "label": "Chandigarh"
+    },
+    {
+      "value": 4040,
+      "label": "Chhattisgarh"
+    },
+    {
+      "value": 4033,
+      "label": "Dadra and Nagar Haveli and Daman and Diu"
+    },
+    {
+      "value": 4021,
+      "label": "Delhi"
+    },
+    {
+      "value": 4009,
+      "label": "Goa"
+    },
+    {
+      "value": 4030,
+      "label": "Gujarat"
+    },
+    {
+      "value": 4007,
+      "label": "Haryana"
+    },
+    {
+      "value": 4020,
+      "label": "Himachal Pradesh"
+    },
+    {
+      "value": 4029,
+      "label": "Jammu and Kashmir"
+    },
+    {
+      "value": 4025,
+      "label": "Jharkhand"
+    },
+    {
+      "value": 4026,
+      "label": "Karnataka"
+    },
+    {
+      "value": 4028,
+      "label": "Kerala"
+    },
+    {
+      "value": 4852,
+      "label": "Ladakh"
+    },
+    {
+      "value": 4019,
+      "label": "Lakshadweep"
+    },
+    {
+      "value": 4039,
+      "label": "Madhya Pradesh"
+    },
+    {
+      "value": 4008,
+      "label": "Maharashtra"
+    },
+    {
+      "value": 4010,
+      "label": "Manipur"
+    },
+    {
+      "value": 4006,
+      "label": "Meghalaya"
+    },
+    {
+      "value": 4036,
+      "label": "Mizoram"
+    },
+    {
+      "value": 4018,
+      "label": "Nagaland"
+    },
+    {
+      "value": 4013,
+      "label": "Odisha"
+    },
+    {
+      "value": 4011,
+      "label": "Puducherry"
+    },
+    {
+      "value": 4015,
+      "label": "Punjab"
+    },
+    {
+      "value": 4014,
+      "label": "Rajasthan"
+    },
+    {
+      "value": 4034,
+      "label": "Sikkim"
+    },
+    {
+      "value": 4035,
+      "label": "Tamil Nadu"
+    },
+    {
+      "value": 4012,
+      "label": "Telangana"
+    },
+    {
+      "value": 4038,
+      "label": "Tripura"
+    },
+    {
+      "value": 4022,
+      "label": "Uttar Pradesh"
+    },
+    {
+      "value": 4016,
+      "label": "Uttarakhand"
+    },
+    {
+      "value": 4853,
+      "label": "West Bengal"
+    }
+  ],
+  "103": [
+    {
+      "value": 3929,
+      "label": "Alborz"
+    },
+    {
+      "value": 3934,
+      "label": "Ardabil"
+    },
+    {
+      "value": 3932,
+      "label": "Bushehr"
+    },
+    {
+      "value": 3921,
+      "label": "Chaharmahal and Bakhtiari"
+    },
+    {
+      "value": 3944,
+      "label": "East Azerbaijan"
+    },
+    {
+      "value": 3939,
+      "label": "Fars"
+    },
+    {
+      "value": 3920,
+      "label": "Gilan"
+    },
+    {
+      "value": 3933,
+      "label": "Golestan"
+    },
+    {
+      "value": 4920,
+      "label": "Hamadan"
+    },
+    {
+      "value": 3937,
+      "label": "Hormozgan"
+    },
+    {
+      "value": 3918,
+      "label": "Ilam"
+    },
+    {
+      "value": 3923,
+      "label": "Isfahan"
+    },
+    {
+      "value": 3943,
+      "label": "Kerman"
+    },
+    {
+      "value": 3919,
+      "label": "Kermanshah"
+    },
+    {
+      "value": 3917,
+      "label": "Khuzestan"
+    },
+    {
+      "value": 3926,
+      "label": "Kohgiluyeh and Boyer-Ahmad"
+    },
+    {
+      "value": 3935,
+      "label": "Kurdistan"
+    },
+    {
+      "value": 3928,
+      "label": "Lorestan"
+    },
+    {
+      "value": 3916,
+      "label": "Markazi"
+    },
+    {
+      "value": 3938,
+      "label": "Mazandaran"
+    },
+    {
+      "value": 3942,
+      "label": "North Khorasan"
+    },
+    {
+      "value": 3941,
+      "label": "Qazvin"
+    },
+    {
+      "value": 3922,
+      "label": "Qom"
+    },
+    {
+      "value": 3927,
+      "label": "Razavi Khorasan"
+    },
+    {
+      "value": 3940,
+      "label": "Semnan"
+    },
+    {
+      "value": 3931,
+      "label": "Sistan and Baluchestan"
+    },
+    {
+      "value": 3930,
+      "label": "South Khorasan"
+    },
+    {
+      "value": 3945,
+      "label": "Tehran"
+    },
+    {
+      "value": 3924,
+      "label": "West Azarbaijan"
+    },
+    {
+      "value": 3936,
+      "label": "Yazd"
+    },
+    {
+      "value": 3925,
+      "label": "Zanjan"
+    }
+  ],
+  "116": [
+    {
+      "value": 3860,
+      "label": "Busan"
+    },
+    {
+      "value": 3846,
+      "label": "Daegu"
+    },
+    {
+      "value": 3850,
+      "label": "Daejeon"
+    },
+    {
+      "value": 3862,
+      "label": "Gangwon"
+    },
+    {
+      "value": 3858,
+      "label": "Gwangju"
+    },
+    {
+      "value": 3847,
+      "label": "Gyeonggi"
+    },
+    {
+      "value": 3848,
+      "label": "Incheon"
+    },
+    {
+      "value": 3853,
+      "label": "Jeju"
+    },
+    {
+      "value": 3854,
+      "label": "North Chungcheong"
+    },
+    {
+      "value": 3855,
+      "label": "North Gyeongsang"
+    },
+    {
+      "value": 3851,
+      "label": "North Jeolla"
+    },
+    {
+      "value": 3861,
+      "label": "Sejong City"
+    },
+    {
+      "value": 3849,
+      "label": "Seoul"
+    },
+    {
+      "value": 3859,
+      "label": "South Chungcheong"
+    },
+    {
+      "value": 3857,
+      "label": "South Gyeongsang"
+    },
+    {
+      "value": 3856,
+      "label": "South Jeolla"
+    },
+    {
+      "value": 3852,
+      "label": "Ulsan"
+    }
+  ],
+  "179": [
+    {
+      "value": 3182,
+      "label": "Al Daayen"
+    },
+    {
+      "value": 3183,
+      "label": "Al Khor"
+    },
+    {
+      "value": 3177,
+      "label": "Al Rayyan"
+    },
+    {
+      "value": 3179,
+      "label": "Al Wakrah"
+    },
+    {
+      "value": 3178,
+      "label": "Al-Shahaniya"
+    },
+    {
+      "value": 3181,
+      "label": "Doha"
+    },
+    {
+      "value": 3180,
+      "label": "Madinat ash Shamal"
+    },
+    {
+      "value": 3184,
+      "label": "Umm Salal"
+    }
+  ],
+  "225": [
+    {
+      "value": 2212,
+      "label": "Adana"
+    },
+    {
+      "value": 2155,
+      "label": "Adıyaman"
+    },
+    {
+      "value": 2179,
+      "label": "Afyonkarahisar"
+    },
+    {
+      "value": 2193,
+      "label": "Ağrı"
+    },
+    {
+      "value": 2210,
+      "label": "Aksaray"
+    },
+    {
+      "value": 2161,
+      "label": "Amasya"
+    },
+    {
+      "value": 2217,
+      "label": "Ankara"
+    },
+    {
+      "value": 2169,
+      "label": "Antalya"
+    },
+    {
+      "value": 2185,
+      "label": "Ardahan"
+    },
+    {
+      "value": 2191,
+      "label": "Artvin"
+    },
+    {
+      "value": 2187,
+      "label": "Aydın"
+    },
+    {
+      "value": 2175,
+      "label": "Balıkesir"
+    },
+    {
+      "value": 2148,
+      "label": "Bartın"
+    },
+    {
+      "value": 2194,
+      "label": "Batman"
+    },
+    {
+      "value": 2177,
+      "label": "Bayburt"
+    },
+    {
+      "value": 2221,
+      "label": "Bilecik"
+    },
+    {
+      "value": 2153,
+      "label": "Bingöl"
+    },
+    {
+      "value": 2215,
+      "label": "Bitlis"
+    },
+    {
+      "value": 2172,
+      "label": "Bolu"
+    },
+    {
+      "value": 2209,
+      "label": "Burdur"
+    },
+    {
+      "value": 2163,
+      "label": "Bursa"
+    },
+    {
+      "value": 2216,
+      "label": "Çanakkale"
+    },
+    {
+      "value": 2168,
+      "label": "Çankırı"
+    },
+    {
+      "value": 2173,
+      "label": "Çorum"
+    },
+    {
+      "value": 2157,
+      "label": "Denizli"
+    },
+    {
+      "value": 2226,
+      "label": "Diyarbakır"
+    },
+    {
+      "value": 2202,
+      "label": "Düzce"
+    },
+    {
+      "value": 2151,
+      "label": "Edirne"
+    },
+    {
+      "value": 2159,
+      "label": "Elazığ"
+    },
+    {
+      "value": 2160,
+      "label": "Erzincan"
+    },
+    {
+      "value": 2165,
+      "label": "Erzurum"
+    },
+    {
+      "value": 2164,
+      "label": "Eskişehir"
+    },
+    {
+      "value": 2203,
+      "label": "Gaziantep"
+    },
+    {
+      "value": 2186,
+      "label": "Giresun"
+    },
+    {
+      "value": 2204,
+      "label": "Gümüşhane"
+    },
+    {
+      "value": 2190,
+      "label": "Hakkâri"
+    },
+    {
+      "value": 2211,
+      "label": "Hatay"
+    },
+    {
+      "value": 2166,
+      "label": "Iğdır"
+    },
+    {
+      "value": 2222,
+      "label": "Isparta"
+    },
+    {
+      "value": 2170,
+      "label": "İstanbul"
+    },
+    {
+      "value": 2205,
+      "label": "İzmir"
+    },
+    {
+      "value": 2227,
+      "label": "Kahramanmaraş"
+    },
+    {
+      "value": 2223,
+      "label": "Karabük"
+    },
+    {
+      "value": 2184,
+      "label": "Karaman"
+    },
+    {
+      "value": 2208,
+      "label": "Kars"
+    },
+    {
+      "value": 2197,
+      "label": "Kastamonu"
+    },
+    {
+      "value": 2200,
+      "label": "Kayseri"
+    },
+    {
+      "value": 2154,
+      "label": "Kilis"
+    },
+    {
+      "value": 2178,
+      "label": "Kırıkkale"
+    },
+    {
+      "value": 2176,
+      "label": "Kırklareli"
+    },
+    {
+      "value": 2180,
+      "label": "Kırşehir"
+    },
+    {
+      "value": 2195,
+      "label": "Kocaeli"
+    },
+    {
+      "value": 2171,
+      "label": "Konya"
+    },
+    {
+      "value": 2149,
+      "label": "Kütahya"
+    },
+    {
+      "value": 2158,
+      "label": "Malatya"
+    },
+    {
+      "value": 2198,
+      "label": "Manisa"
+    },
+    {
+      "value": 2224,
+      "label": "Mardin"
+    },
+    {
+      "value": 2156,
+      "label": "Mersin"
+    },
+    {
+      "value": 2182,
+      "label": "Muğla"
+    },
+    {
+      "value": 2162,
+      "label": "Muş"
+    },
+    {
+      "value": 2196,
+      "label": "Nevşehir"
+    },
+    {
+      "value": 2189,
+      "label": "Niğde"
+    },
+    {
+      "value": 2174,
+      "label": "Ordu"
+    },
+    {
+      "value": 2214,
+      "label": "Osmaniye"
+    },
+    {
+      "value": 2219,
+      "label": "Rize"
+    },
+    {
+      "value": 2150,
+      "label": "Sakarya"
+    },
+    {
+      "value": 2220,
+      "label": "Samsun"
+    },
+    {
+      "value": 2183,
+      "label": "Şanlıurfa"
+    },
+    {
+      "value": 2207,
+      "label": "Siirt"
+    },
+    {
+      "value": 4854,
+      "label": "Sinop"
+    },
+    {
+      "value": 2181,
+      "label": "Sivas"
+    },
+    {
+      "value": 2225,
+      "label": "Şırnak"
+    },
+    {
+      "value": 2167,
+      "label": "Tekirdağ"
+    },
+    {
+      "value": 2199,
+      "label": "Tokat"
+    },
+    {
+      "value": 2206,
+      "label": "Trabzon"
+    },
+    {
+      "value": 2192,
+      "label": "Tunceli"
+    },
+    {
+      "value": 2201,
+      "label": "Uşak"
+    },
+    {
+      "value": 2152,
+      "label": "Van"
+    },
+    {
+      "value": 2218,
+      "label": "Yalova"
+    },
+    {
+      "value": 2188,
+      "label": "Yozgat"
+    },
+    {
+      "value": 2213,
+      "label": "Zonguldak"
+    }
+  ]
+}

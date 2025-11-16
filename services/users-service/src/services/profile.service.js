@@ -116,7 +116,7 @@ export const updateProfileByUserIdService = async (user_id, data, options = {}) 
   const updatedCount = await updateProfileByUserId(user_id, data, options);
 
   if (updatedCount === 0) {
-    const error = new Error(`Profile not found or not updated for user_id ${user_id}`);
+    const error = new Error(`Profile not found or not updated.`);
     error.status = 404;
     throw error;
   }

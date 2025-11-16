@@ -3,7 +3,17 @@ export class InlineName {
   static in_profile_n = "Profile";
   static in_coin_n = "Coin";
   static in_register_n = "Register";
-  static in_edit_n = "Edit";
+  static in_edit_on_web_n = "Edit On Web";
+  static in_edit_on_telegram_n = "Edit On Telegram";
+  static in_edit_gender_on_telegram_n = "Edit Gender";
+  static in_edit_firstname_on_telegram_n = "Edit Firstname";
+  static in_edit_lastname_on_telegram_n = "Edit Lastname";
+  static in_edit_age_on_telegram_n = "Edit Age";
+  static in_edit_country_on_telegram_n = "Edit Country";
+  static in_edit_state_on_telegram_n = "Edit State";
+  static in_edit_city_on_telegram_n = "Edit City";
+  static in_edit_career_on_telegram_n = "Edit Career";
+  static in_edit_interests_on_telegram_n = "Edit Interests";
   static in_search_n = "Search";
   static in_search_boys_n = "Boys";
   static in_search_girls_n = "Girls";
@@ -34,7 +44,17 @@ export class InlineCallback {
   static in_profile_c = "PROFILE::me";
   static in_coin_c = "COIN::";
   static in_register_c = "REGISTER::";
-  static in_edit_c = "EDIT::";
+  static in_edit_on_web_c = "PROFILE::editOnWeb";
+  static in_edit_on_telegram_c = "PROFILE::editOnTelegram";
+  static in_edit_gender_on_telegram_c = "PROFILE::gender::editOnTelegram";
+  static in_edit_firstname_on_telegram_c = "PROFILE::first_name::editOnTelegram";
+  static in_edit_lastname_on_telegram_c = "PROFILE::last_name::editOnTelegram";
+  static in_edit_age_on_telegram_c = "PROFILE::age::editOnTelegram";
+  static in_edit_country_on_telegram_c = "PROFILE::country::editOnTelegram";
+  static in_edit_state_on_telegram_c = "PROFILE::state::editOnTelegram";
+  static in_edit_city_on_telegram_c = "PROFILE::city::editOnTelegram";
+  static in_edit_career_on_telegram_c = "PROFILE::career::editOnTelegram";
+  static in_edit_interests_on_telegram_c = "PROFILE::interests::editOnTelegram";
   static in_search_c = "SEARCH::";
   static in_search_interests_c = 'SEARCH::{"field":"interests","op":"terms"}';
   static in_search_career_c = 'SEARCH::{"field":"career","op":"term"}';
@@ -93,10 +113,60 @@ export class InlineButton {
     callback_data: InlineCallback.in_register_c,
   };
 
-  static in_edit_b = {
-    text: InlineName.in_edit_n,
-    callback_data: InlineCallback.in_edit_c,
+  static in_edit_on_web_b = {
+    text: InlineName.in_edit_on_web_n,
+    callback_data: InlineCallback.in_edit_on_web_c,
     url: `http://${process.env.HOST_NAME}/user/profile`,
+  };
+
+  static in_edit_on_telegram_b = {
+    text: InlineName.in_edit_on_telegram_n,
+    callback_data: InlineCallback.in_edit_on_telegram_c,
+  };
+
+  static in_edit_firstname_on_telegram_b = {
+    text: InlineName.in_edit_firstname_on_telegram_n,
+    callback_data: InlineCallback.in_edit_firstname_on_telegram_c,
+  };
+
+  static in_edit_lastname_on_telegram_b = {
+    text: InlineName.in_edit_lastname_on_telegram_n,
+    callback_data: InlineCallback.in_edit_lastname_on_telegram_c,
+  };
+
+  static in_edit_gender_on_telegram_b = {
+    text: InlineName.in_edit_gender_on_telegram_n,
+    callback_data: InlineCallback.in_edit_gender_on_telegram_c,
+  };
+
+  static in_edit_age_on_telegram_b = {
+    text: InlineName.in_edit_age_on_telegram_n,
+    callback_data: InlineCallback.in_edit_age_on_telegram_c,
+  };
+
+  static in_edit_country_on_telegram_b = {
+    text: InlineName.in_edit_country_on_telegram_n,
+    callback_data: InlineCallback.in_edit_country_on_telegram_c,
+  };
+
+  static in_edit_state_on_telegram_b = {
+    text: InlineName.in_edit_state_on_telegram_n,
+    callback_data: InlineCallback.in_edit_state_on_telegram_c,
+  };
+
+  static in_edit_city_on_telegram_b = {
+    text: InlineName.in_edit_city_on_telegram_n,
+    callback_data: InlineCallback.in_edit_city_on_telegram_c,
+  };
+
+  static in_edit_career_on_telegram_b = {
+    text: InlineName.in_edit_career_on_telegram_n,
+    callback_data: InlineCallback.in_edit_career_on_telegram_c,
+  };
+
+  static in_edit_interests_on_telegram_b = {
+    text: InlineName.in_edit_interests_on_telegram_n,
+    callback_data: InlineCallback.in_edit_interests_on_telegram_c,
   };
 
   static in_search_b = {

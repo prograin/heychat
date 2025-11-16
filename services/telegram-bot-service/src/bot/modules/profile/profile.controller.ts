@@ -32,6 +32,10 @@ export class ProfileSelfController {
       throw error;
     }
   };
+
+  static async updateProfile(token: string, data: Record<any, any>) {
+    return await ProfileUserService.updateProfile(token, data);
+  }
 }
 
 export class ProfileAdminController {
