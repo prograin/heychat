@@ -37,6 +37,7 @@ export class InlineName {
   static in_decline_request_n = "Decline";
   static in_end_chat_n = "End";
   static in_cancel_n = "Cancel";
+  static in_cancel_edit_profile_n = "Cancel Edit Profile";
 }
 
 export class InlineCallback {
@@ -78,6 +79,7 @@ export class InlineCallback {
   static in_decline_request_c = "CHAT::{userId}::declineRequest";
   static in_end_chat_c = "CHAT::{userId}::endChat";
   static in_cancel_c = "CANCEL::";
+  static in_cancel_edit_profile_c = "CANCEL::cancelEditProfile";
 }
 
 export class InlineMeta {
@@ -278,5 +280,10 @@ export class InlineButton {
   static in_cancel_b = {
     text: InlineName.in_cancel_n,
     callback_data: InlineCallback.in_cancel_c,
+  };
+
+  static in_cancel_edit_profile_b = {
+    text: InlineName.in_cancel_edit_profile_n,
+    callback_data: InlineCallback.in_cancel_edit_profile_c,
   };
 }

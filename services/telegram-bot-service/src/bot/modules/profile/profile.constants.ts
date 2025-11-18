@@ -13,22 +13,22 @@ export const editProfileFieldMessage = {
       column: 2,
     },
     message: "Select your gender from under keyboard",
-    buttons: [[InlineButton.in_cancel_b]],
+    buttons: [[InlineButton.in_cancel_edit_profile_b]],
   },
   first_name: {
     type_markup: "inline",
     message: "Enter your first name:",
-    buttons: [[InlineButton.in_cancel_b]],
+    buttons: [[InlineButton.in_cancel_edit_profile_b]],
   },
   last_name: {
     type_markup: "inline",
     message: "Enter your last name:",
-    buttons: [[InlineButton.in_cancel_b]],
+    buttons: [[InlineButton.in_cancel_edit_profile_b]],
   },
   age: {
     type_markup: "inline",
     message: "Enter yout age:",
-    buttons: [[InlineButton.in_cancel_b]],
+    buttons: [[InlineButton.in_cancel_edit_profile_b]],
   },
   country: {
     type_markup: "keyboard",
