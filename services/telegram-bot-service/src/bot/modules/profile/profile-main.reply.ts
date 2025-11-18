@@ -4,14 +4,19 @@ import TelegramBot, { CallbackQuery, Message } from "node-telegram-bot-api";
 import BotResponse from "src/bot/types/bot-response.type";
 import profileMe from "./profile-me.reply";
 import editProfile from "./profile-edit.reply";
+import cancelEditProfile from "./profile-cancel-edit.reply";
 
 const profileMainReplyCallback = async (bot: TelegramBot, callbackQuery: CallbackQuery, response: BotResponse) => {
   const lastPart = response.callback?.data.parts.at(-1);
+  const callbackDataPart = response.callback!.data.parts;
+  const infoData = callbackDataPart[callbackDataPart.length - 2] || "";
 
   switch (lastPart) {
     case "editOnTelegram":
       await editProfile(bot, callbackQuery.message as Message, response);
       break;
+    case "cancelEditProfile":
+      await cancelEditProfile(bot, callbackQuery.message as Message, response, true, true);
     case "me":
       await profileMe(bot, callbackQuery.message as Message, response);
       break;
@@ -25,6 +30,9 @@ export const profileMainReplyMessage = async (bot: TelegramBot, message: Message
     case KeyboardName.ke_profile_n:
       await profileMe(bot, message, response);
       break;
+
+    case KeyboardName.ke_cancel_edit_profile_n:
+      await cancelEditProfile(bot, message, response);
   }
 };
 
