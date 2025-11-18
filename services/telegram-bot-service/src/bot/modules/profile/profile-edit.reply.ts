@@ -21,7 +21,7 @@ async function editProfile(bot: TelegramBot, message: Message, response: BotResp
     const field = telegramProfileEditData.field;
     const value = message.text;
 
-    if (telegramProfileEditData.field == "interests") {
+    if (field == "interests") {
       const interests = profile["interests"];
 
       if (value == KeyboardName.ke_save_edit_profile_n) {

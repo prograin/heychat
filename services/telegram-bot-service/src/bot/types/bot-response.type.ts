@@ -1,6 +1,8 @@
+import { TelegramProfileEditData } from "./bot-telegram-profile-edit";
 import User from "./user.type";
 export default interface BotResponse {
   user: User;
+  edit_profile: TelegramProfileEditData;
   callback?: {
     data: {
       parts: string[];
@@ -10,6 +12,9 @@ export default interface BotResponse {
 }
 
 export const botResponseDefault = {
+  edit_profile: {
+    isActive: false,
+  },
   user: {
     exists: false,
     id: null,
