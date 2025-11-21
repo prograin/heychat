@@ -1,4 +1,6 @@
 import { ProfileUserService, ProfileAdminService } from "src/bot/modules/profile/profile.service";
+import { profileSchema } from "./profile.schema";
+import { validateWithZod } from "src/bot/middlewares/validate.middleware";
 
 export class ProfileSelfController {
   static getProfile = async (token: string) => {
@@ -34,7 +36,12 @@ export class ProfileSelfController {
   };
 
   static async updateProfile(token: string, data: Record<any, any>) {
-    return await ProfileUserService.updateProfile(token, data);
+    const validatedData = validateWithZod(profileSchema, data);
+    if (validatedData.valid) {
+      return await ProfileUserService.updateProfile(token, validatedData.data);
+    } else {
+      throw Error(validatedData.errors);
+    }
   }
 }
 

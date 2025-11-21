@@ -4,6 +4,7 @@ import { BotEvent } from "src/bot/types/bot-event.type";
 import { bot } from "src/bot-entry";
 import { ChatSelfController } from "../modules/chat/chat.controller";
 import { UserAdminController } from "../modules/users/user.controller";
+import { removeTelegramProfileEdit } from "../modules/profile/profile.cache";
 
 export const userSessionInterceptor = async (event: BotEvent, response: BotResponse, next: Next) => {
   try {
@@ -35,6 +36,8 @@ export const userSessionInterceptor = async (event: BotEvent, response: BotRespo
       response.user.partner.user_id = partnerUserId;
       response.user.partner.telegram_id = Number(partnerRes.data.telegram_id);
       response.user.partner.chat_id = Number(partnerRes.data.telegram_chat_id);
+
+      await removeTelegramProfileEdit(Number(response.user.id));
     }
 
     response.user.has_session = isActive;

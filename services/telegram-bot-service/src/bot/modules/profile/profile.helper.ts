@@ -71,11 +71,11 @@ export function getCountries() {
 
 export function getStates(countryLabel: any) {
   const countryId = getCountryBySource("label", countryLabel);
-  return states[countryId] || [];
+  return states[countryId].map((item) => item.label) || [];
 }
 
 export function getCities(stateId: number) {
-  return cities[stateId] || [];
+  return cities[stateId].map((item) => item.label) || [];
 }
 
 export function getCityBySource(source: string, value: string | number) {

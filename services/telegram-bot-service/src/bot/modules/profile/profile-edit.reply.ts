@@ -7,10 +7,9 @@ import { KeyboardName } from "src/bot/buttons/keyboard.button";
 import { ma_profile_edit_on_telegram_in } from "./profile.markup";
 import { ma_main_ke } from "../start/start.markup";
 import { ProfileSelfController } from "./profile.controller";
+import { profile_updated_text } from "./profile.text";
 
 async function editProfile(bot: TelegramBot, message: Message, response: BotResponse) {
-  const callbackDataPart = response.callback!.data.parts;
-  const infoData = callbackDataPart[callbackDataPart.length - 2] || "";
   const profile = response.user.profile as Record<any, any>;
   const userId = response.user.id;
   const token = response.user.token;
@@ -22,24 +21,39 @@ async function editProfile(bot: TelegramBot, message: Message, response: BotResp
     const value = message.text;
 
     if (field == "interests") {
-      const interests = profile["interests"];
-
       if (value == KeyboardName.ke_save_edit_profile_n) {
+        await ProfileSelfController.updateProfile(String(token), { [String(field)]: telegramProfileEditData.value });
+        await bot.sendMessage(chatId, `Your profile has been updated sucessfully.`, { reply_markup: ma_main_ke });
+        await removeTelegramProfileEdit(Number(userId));
       } else {
         if (Array.isArray(telegramProfileEditData.value)) {
-          telegramProfileEditData.value = interests.includes(value)
+          telegramProfileEditData.value = telegramProfileEditData.value.includes(value)
             ? telegramProfileEditData.value.filter((i) => i !== value)
             : [...telegramProfileEditData.value, value];
         } else {
           telegramProfileEditData.value = [value];
         }
 
-        await setUserTelegramProfileEdit(Number(userId), {
-          ...telegramProfileEditData,
-        });
+        await setUserTelegramProfileEdit(Number(userId), { ...telegramProfileEditData });
+        const interestField = editProfileFieldMessage[field];
+        const allInterests = interestField.arrange.dynamic_values.functionValues(telegramProfileEditData.value);
+        const cols = interestField.arrange.column;
+        const interestsKeyboards = [];
+
+        for (let i = 0; i < allInterests.length; i += cols) {
+          const row = allInterests.slice(i, i + cols).map((value) => ({
+            text: value as string,
+          }));
+          interestsKeyboards.push(row);
+        }
+
+        interestsKeyboards.push([{ text: KeyboardName.ke_cancel_edit_profile_n }]);
+        interestsKeyboards.push([{ text: KeyboardName.ke_save_edit_profile_n }]);
+        await bot.sendMessage(chatId, `${value} was adedd to list`, { reply_markup: { keyboard: interestsKeyboards } });
       }
     } else {
       await ProfileSelfController.updateProfile(String(token), { [String(field)]: value });
+      await bot.sendMessage(chatId, profile_updated_text, { reply_markup: ma_main_ke });
       await removeTelegramProfileEdit(Number(userId));
     }
     return;
@@ -47,6 +61,8 @@ async function editProfile(bot: TelegramBot, message: Message, response: BotResp
 
   // --------------------------------------
 
+  const callbackDataPart = response.callback!.data.parts;
+  const infoData = callbackDataPart[callbackDataPart.length - 2] || "";
   switch (infoData) {
     case "gender":
     case "first_name":
@@ -87,8 +103,11 @@ async function editProfile(bot: TelegramBot, message: Message, response: BotResp
           }));
           keyboards.push(row);
         }
+        if ("has_save_keyboard" in field) {
+          keyboards.push([{ text: KeyboardName.ke_save_edit_profile_n }]);
+        }
         keyboards.push([{ text: KeyboardName.ke_cancel_edit_profile_n }]);
-        keyboards.push([{ text: KeyboardName.ke_save_edit_profile_n }]);
+
         await bot.sendMessage(chatId, field.message, { reply_markup: { keyboard: keyboards } });
       } else {
         await bot.sendMessage(chatId, field.message, { reply_markup: { inline_keyboard: field.buttons } });

@@ -1,4 +1,4 @@
-function validateWithZod(schema: any, data: any) {
+export function validateWithZod(schema: any, data: any) {
   const result = schema.safeParse(data);
   if (!result.success) {
     return { valid: false, errors: result.error.errors };

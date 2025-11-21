@@ -19,6 +19,7 @@ import relations from "../modules/relations/relations-main.reply";
 import { KeyboardName } from "../buttons/keyboard.button";
 import { userSessionInterceptor } from "../interceptor/user-session.interceptor";
 import { noneCommandFilterInterceptor } from "../interceptor/none-command-filter.interceptor";
+import { profileEditInterceptor } from "../interceptor/profile-edit.interceptor";
 
 export class ManageHandlers {
   private bot: TelegramBot;
@@ -35,13 +36,20 @@ export class ManageHandlers {
       CommandExpression.c_start_exp,
       interceptorRunner(
         this.bot,
-        [fromValidateInterceptor, userTokenValidateInterceptor, userValidateInterceptor, userSessionInterceptor, userButtonClickedInterceptor],
+        [
+          fromValidateInterceptor,
+          userTokenValidateInterceptor,
+          userValidateInterceptor,
+          userSessionInterceptor,
+          userButtonClickedInterceptor,
+          profileEditInterceptor(true),
+        ],
         start
       )
     );
     this.bot.onText(
       CommandExpression.c_username_exp,
-      interceptorRunner(this.bot, [fromValidateInterceptor, authInterceptor, userButtonClickedInterceptor], search)
+      interceptorRunner(this.bot, [fromValidateInterceptor, authInterceptor, userButtonClickedInterceptor, profileEditInterceptor(true)], search)
     );
   }
 
@@ -57,6 +65,7 @@ export class ManageHandlers {
           userButtonClickedInterceptor,
           userPermissionsInterceptor,
           userSessionInterceptor,
+          profileEditInterceptor(false),
         ],
         async (bot, event: BotEvent, response) => {
           const message = event as Message;
@@ -66,10 +75,16 @@ export class ManageHandlers {
             return;
           }
 
+          if (response.edit_profile.isActive) {
+            await profile(this.bot, message, response);
+            return;
+          }
+
           const text = message.text?.trim();
           if (!text) return;
 
           switch (text) {
+            case KeyboardName.ke_cancel_edit_profile_n:
             case KeyboardName.ke_profile_n:
               await profile(this.bot, message, response);
               break;
@@ -100,6 +115,7 @@ export class ManageHandlers {
           userPermissionsInterceptor,
           inlineButtonValidateInterceptor,
           userSessionInterceptor,
+          profileEditInterceptor(false),
         ],
         async (bot, event: BotEvent, response) => {
           const callbackQuery = event as CallbackQuery;
@@ -112,12 +128,18 @@ export class ManageHandlers {
             return;
           }
 
+          if (response.edit_profile.isActive) {
+            await profile(this.bot, callbackQuery, response);
+            return;
+          }
+
           if (data.startsWith("CHAT::")) {
             await chat(bot, callbackQuery, response);
           } else if (data.startsWith("RELATIONS::")) {
             await relations(bot, callbackQuery, response);
           } else {
             switch (data) {
+              case InlineCallback.in_cancel_edit_profile_c:
               case InlineCallback.in_edit_on_telegram_c:
               case InlineCallback.in_edit_age_on_telegram_c:
               case InlineCallback.in_edit_career_on_telegram_c:

@@ -23,7 +23,7 @@ export const profileSchema = z.object({
   state: z.enum(allLabelStates).nullable().optional(),
   city: z.enum(allLabelCities).nullable().optional(),
   career: z.enum(CAREER_VALUES).nullable().optional(),
-  interests: z.array(z.enum(INTEREST_VALUES)).nullable().optional(),
+  interests: z.array(z.enum(INTEREST_VALUES)).max(7, "You can select up to 7 interests only.").nullable().optional(),
   description: z
     .preprocess((val) => (val === "" || val === undefined ? null : val), z.string().trim().max(600, "Description too long").nullable())
     .optional(),

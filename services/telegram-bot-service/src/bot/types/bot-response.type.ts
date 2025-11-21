@@ -14,6 +14,8 @@ export default interface BotResponse {
 export const botResponseDefault = {
   edit_profile: {
     isActive: false,
+    field: null,
+    value: null,
   },
   user: {
     exists: false,

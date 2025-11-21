@@ -25,7 +25,7 @@ export class ProfileUserService {
   }
 
   static async updateProfile(token: string, data: Record<any, any>) {
-    return await UserAxiosInstance.put("http://${process.env.API_URL}:3004/profiles/me", data, { headers: { token: token } });
+    return await UserAxiosInstance.put(`http://${process.env.API_URL}:3004/profiles/me`, data, { headers: { token: token } });
   }
 }
 

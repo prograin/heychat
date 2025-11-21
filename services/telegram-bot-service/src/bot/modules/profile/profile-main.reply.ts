@@ -8,8 +8,6 @@ import cancelEditProfile from "./profile-cancel-edit.reply";
 
 const profileMainReplyCallback = async (bot: TelegramBot, callbackQuery: CallbackQuery, response: BotResponse) => {
   const lastPart = response.callback?.data.parts.at(-1);
-  const callbackDataPart = response.callback!.data.parts;
-  const infoData = callbackDataPart[callbackDataPart.length - 2] || "";
 
   if (response.edit_profile.isActive) {
     if (lastPart == "cancelEditProfile") {
@@ -24,6 +22,9 @@ const profileMainReplyCallback = async (bot: TelegramBot, callbackQuery: Callbac
     case "editOnTelegram":
       await editProfile(bot, callbackQuery.message as Message, response);
       break;
+    case "cancelEditProfile":
+      await cancelEditProfile(bot, callbackQuery.message as Message, response, true, true);
+      break;
     case "me":
       await profileMe(bot, callbackQuery.message as Message, response);
       break;
@@ -35,7 +36,7 @@ export const profileMainReplyMessage = async (bot: TelegramBot, message: Message
 
   if (response.edit_profile.isActive) {
     if (keyboard == KeyboardName.ke_cancel_edit_profile_n) {
-      await cancelEditProfile(bot, message as Message, response, true, true);
+      await cancelEditProfile(bot, message as Message, response, false, false);
     } else {
       await editProfile(bot, message as Message, response);
     }
@@ -48,7 +49,7 @@ export const profileMainReplyMessage = async (bot: TelegramBot, message: Message
       break;
 
     case KeyboardName.ke_cancel_edit_profile_n:
-      await cancelEditProfile(bot, message, response);
+      await cancelEditProfile(bot, message, response, false, false);
       break;
   }
 };

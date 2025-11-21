@@ -2,8 +2,9 @@ import TelegramBot, { Message } from "node-telegram-bot-api";
 import BotResponse from "src/bot/types/bot-response.type";
 import { getUserTelegramProfileEdit, removeTelegramProfileEdit, setUserTelegramProfileEdit } from "./profile.cache";
 import { TelegramProfileEditData } from "src/bot/types/bot-telegram-profile-edit";
-import { cancel_edit_profile_not_exists_text, cancel_edit_profile_text } from "./profile.text";
+import { cancel_edit_profile_inline_text, cancel_edit_profile_not_exists_text, cancel_edit_profile_text } from "./profile.text";
 import { safeRunFunction } from "src/shared/utils/safe-run.util";
+import { ma_main_ke } from "../start/start.markup";
 
 async function cancelEditProfile(bot: TelegramBot, message: Message, response: BotResponse, editMessage: boolean = false, safeEdit: boolean = false) {
   const userId = response.user.id;
@@ -15,15 +16,14 @@ async function cancelEditProfile(bot: TelegramBot, message: Message, response: B
     await removeTelegramProfileEdit(Number(userId));
     if (editMessage) {
       if (safeEdit) {
-        safeRunFunction(() => bot.editMessageText(cancel_edit_profile_text, { chat_id: chatId, message_id: messageId }));
+        safeRunFunction(() => bot.editMessageText(cancel_edit_profile_inline_text, { chat_id: chatId, message_id: messageId }));
       } else {
-        await bot.editMessageText(cancel_edit_profile_text, { chat_id: chatId, message_id: messageId });
+        await bot.editMessageText(cancel_edit_profile_inline_text, { chat_id: chatId, message_id: messageId });
       }
-    } else {
-      await bot.sendMessage(chatId as number, cancel_edit_profile_text);
     }
+    await bot.sendMessage(chatId as number, cancel_edit_profile_text, { reply_markup: ma_main_ke });
   } else {
-    await bot.sendMessage(chatId as number, cancel_edit_profile_not_exists_text);
+    await bot.sendMessage(chatId as number, cancel_edit_profile_not_exists_text, { reply_markup: ma_main_ke });
   }
 }
 
