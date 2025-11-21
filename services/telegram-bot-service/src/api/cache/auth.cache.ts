@@ -10,3 +10,7 @@ export const setUserToken = async (user_id: number, token: string) => {
 export const getUserToken = async (user_id: number | null) => {
   return await redis.get(PREFIX_KEY.user.token.key(user_id));
 };
+
+export const removeUserToken = async (user_id: number | null) => {
+  return await redis.del(PREFIX_KEY.user.token.key(user_id));
+};

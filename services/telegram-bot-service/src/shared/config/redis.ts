@@ -11,6 +11,7 @@ const redis = new Redis({
 });
 
 export const publisher = redis.duplicate();
+export const consumer = redis.duplicate();
 
 redis.on("connect", () => console.log("✅ Redis connected"));
 redis.on("ready", () => console.log("⚡ Redis ready"));

@@ -9,10 +9,14 @@ if (process.env.NODE_ENV === "production") {
 
 import app from "./app";
 import runBot from "./bot-entry";
+import { userConsumer } from "./bot/event/consumers/user.consumer";
 
 const startServer = async () => {
   try {
     const port = process.env.PORT ? Number(process.env.PORT) : 3003;
+
+    // Events
+    await userConsumer.init();
 
     app.listen(port, () => {
       console.log(`Server is running on port ${port}`);

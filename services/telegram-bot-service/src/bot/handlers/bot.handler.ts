@@ -20,6 +20,8 @@ import { KeyboardName } from "../buttons/keyboard.button";
 import { userSessionInterceptor } from "../interceptor/user-session.interceptor";
 import { noneCommandFilterInterceptor } from "../interceptor/none-command-filter.interceptor";
 import { profileEditInterceptor } from "../interceptor/profile-edit.interceptor";
+import { keyboard_description_text } from "../modules/start/start.text";
+import { ma_main_ke } from "../modules/start/start.markup";
 
 export class ManageHandlers {
   private bot: TelegramBot;
@@ -31,6 +33,7 @@ export class ManageHandlers {
     this.callbackHandler();
   }
 
+  // Command
   async commandHandler() {
     this.bot.onText(
       CommandExpression.c_start_exp,
@@ -53,6 +56,7 @@ export class ManageHandlers {
     );
   }
 
+  // All Message
   async messageHandler() {
     this.bot.on(
       "message",
@@ -70,13 +74,13 @@ export class ManageHandlers {
         async (bot, event: BotEvent, response) => {
           const message = event as Message;
 
-          if (response.user.has_session) {
-            await chat(bot, message, response);
+          if (response.edit_profile.isActive) {
+            await profile(this.bot, message, response);
             return;
           }
 
-          if (response.edit_profile.isActive) {
-            await profile(this.bot, message, response);
+          if (response.user.has_session) {
+            await chat(bot, message, response);
             return;
           }
 
@@ -96,12 +100,17 @@ export class ManageHandlers {
             case KeyboardName.ke_end_chat_n:
               await chat(this.bot, message, response);
               break;
+
+            default:
+              await bot.sendMessage(message.chat.id, keyboard_description_text, { reply_markup: ma_main_ke });
+              break;
           }
         }
       )
     );
   }
 
+  // Callback From InlineKeyaboard
   async callbackHandler() {
     this.bot.on(
       "callback_query",
@@ -171,6 +180,10 @@ export class ManageHandlers {
               case InlineCallback.in_search_next_page_c:
               case InlineCallback.in_search_previous_page_c:
                 await search(this.bot, callbackQuery, response);
+                break;
+
+              default:
+                await bot.sendMessage(message.chat.id, keyboard_description_text, { reply_markup: ma_main_ke });
                 break;
             }
           }

@@ -51,7 +51,7 @@ ${genderSticker} <b>Name:</b> ${firstName} ${lastName}
 🎂 <b>Age:</b> ${age}
 ${careerSticker} <b>Career:</b> ${career}
 ⭐ <b>Interests:</b> ${interestsStr}
-📍 <b>Location:</b> ${city}, ${state}, ${country}`;
+📍 <b>Location:</b> ${country}, ${state}, ${city}`;
   if (description) {
     profileText += `\n<b>💬 Description:</b> <blockquote>${description}"</blockquote>`;
   }
@@ -71,10 +71,12 @@ export function getCountries() {
 
 export function getStates(countryLabel: any) {
   const countryId = getCountryBySource("label", countryLabel);
+  if (!countryId) return [];
   return states[countryId].map((item) => item.label) || [];
 }
 
 export function getCities(stateId: number) {
+  if (!stateId) return [];
   return cities[stateId].map((item) => item.label) || [];
 }
 

@@ -32,7 +32,6 @@ export const getMyProfileController = async (req, res, next) => {
 
     res.status(200).json({ profile: profile });
   } catch (error) {
-    error.status = 401;
     next(error);
   }
 };

@@ -31,3 +31,13 @@ By clicking on <b>Profile</b>, you can view your contact list, check your block 
 <b>🔍 Search:</b>  
 Use the <b>Search</b> feature to find other users based on the fields you’ve filled in your profile.
 `;
+
+export const keyboard_description_text = `
+⌨️ To navigate the bot easily, you can use the keyboard at the bottom of the chat.  
+
+With this keyboard, you can quickly:  
+• View or edit your profile  
+• Search for other users  
+• Access different sections of the bot  
+
+Just tap the buttons and enjoy all the features!`;

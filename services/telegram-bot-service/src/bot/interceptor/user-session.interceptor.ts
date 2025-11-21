@@ -4,7 +4,9 @@ import { BotEvent } from "src/bot/types/bot-event.type";
 import { bot } from "src/bot-entry";
 import { ChatSelfController } from "../modules/chat/chat.controller";
 import { UserAdminController } from "../modules/users/user.controller";
-import { removeTelegramProfileEdit } from "../modules/profile/profile.cache";
+import { getUserTelegramProfileEdit, removeTelegramProfileEdit } from "../modules/profile/profile.cache";
+import { getMessageFromEvent } from "../utils/telegram.util";
+import { ma_accept_request_ke } from "../modules/chat/chat.markup";
 
 export const userSessionInterceptor = async (event: BotEvent, response: BotResponse, next: Next) => {
   try {
@@ -37,7 +39,15 @@ export const userSessionInterceptor = async (event: BotEvent, response: BotRespo
       response.user.partner.telegram_id = Number(partnerRes.data.telegram_id);
       response.user.partner.chat_id = Number(partnerRes.data.telegram_chat_id);
 
-      await removeTelegramProfileEdit(Number(response.user.id));
+      let telegramProfileEditData = await getUserTelegramProfileEdit(Number(response.user.id));
+      if (telegramProfileEditData) {
+        const chatId = await getMessageFromEvent(event);
+        if (chatId)
+          await bot.sendMessage(chatId, "To edit your profile, please end your current chat session and try again.", {
+            reply_markup: { keyboard: ma_accept_request_ke },
+          });
+        await removeTelegramProfileEdit(Number(response.user.id));
+      }
     }
 
     response.user.has_session = isActive;

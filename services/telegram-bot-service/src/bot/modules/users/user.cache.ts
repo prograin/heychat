@@ -28,3 +28,13 @@ export const getMapTelegramToUser = async (user_id: number) => {
   }
   return value;
 };
+
+export async function removeMapTelegramToUser(user_id: number) {
+  const key = PREFIX_KEY.map.telegram.user.key(user_id);
+  await redis.del(key);
+}
+
+export async function removeMapUserToTelegram(telegram_id: number) {
+  const key = PREFIX_KEY.map.user.telegram.key(telegram_id);
+  await redis.del(key);
+}

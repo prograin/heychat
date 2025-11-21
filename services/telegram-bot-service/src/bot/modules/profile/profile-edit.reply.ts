@@ -20,41 +20,55 @@ async function editProfile(bot: TelegramBot, message: Message, response: BotResp
     const field = telegramProfileEditData.field;
     const value = message.text;
 
-    if (field == "interests") {
-      if (value == KeyboardName.ke_save_edit_profile_n) {
-        await ProfileSelfController.updateProfile(String(token), { [String(field)]: telegramProfileEditData.value });
-        await bot.sendMessage(chatId, `Your profile has been updated sucessfully.`, { reply_markup: ma_main_ke });
-        await removeTelegramProfileEdit(Number(userId));
-      } else {
-        if (Array.isArray(telegramProfileEditData.value)) {
-          telegramProfileEditData.value = telegramProfileEditData.value.includes(value)
-            ? telegramProfileEditData.value.filter((i) => i !== value)
-            : [...telegramProfileEditData.value, value];
+    switch (field) {
+      case "interests":
+        if (value == KeyboardName.ke_save_edit_profile_n) {
+          await ProfileSelfController.updateProfile(String(token), { [String(field)]: telegramProfileEditData.value });
+          await bot.sendMessage(chatId, `Your profile has been updated sucessfully.`, { reply_markup: ma_main_ke });
+          await removeTelegramProfileEdit(Number(userId));
         } else {
-          telegramProfileEditData.value = [value];
+          if (Array.isArray(telegramProfileEditData.value)) {
+            telegramProfileEditData.value = telegramProfileEditData.value.includes(value)
+              ? telegramProfileEditData.value.filter((i) => i !== value)
+              : [...telegramProfileEditData.value, value];
+          } else {
+            telegramProfileEditData.value = [value];
+          }
+
+          await setUserTelegramProfileEdit(Number(userId), { ...telegramProfileEditData });
+          const interestField = editProfileFieldMessage[field];
+          const allInterests = interestField.arrange.dynamic_values.functionValues(telegramProfileEditData.value);
+          const cols = interestField.arrange.column;
+          const interestsKeyboards = [];
+
+          for (let i = 0; i < allInterests.length; i += cols) {
+            const row = allInterests.slice(i, i + cols).map((value) => ({
+              text: value as string,
+            }));
+            interestsKeyboards.push(row);
+          }
+
+          interestsKeyboards.push([{ text: KeyboardName.ke_cancel_edit_profile_n }]);
+          interestsKeyboards.push([{ text: KeyboardName.ke_save_edit_profile_n }]);
+          await bot.sendMessage(chatId, `${value} was adedd to list`, { reply_markup: { keyboard: interestsKeyboards } });
         }
+        break;
 
-        await setUserTelegramProfileEdit(Number(userId), { ...telegramProfileEditData });
-        const interestField = editProfileFieldMessage[field];
-        const allInterests = interestField.arrange.dynamic_values.functionValues(telegramProfileEditData.value);
-        const cols = interestField.arrange.column;
-        const interestsKeyboards = [];
-
-        for (let i = 0; i < allInterests.length; i += cols) {
-          const row = allInterests.slice(i, i + cols).map((value) => ({
-            text: value as string,
-          }));
-          interestsKeyboards.push(row);
-        }
-
-        interestsKeyboards.push([{ text: KeyboardName.ke_cancel_edit_profile_n }]);
-        interestsKeyboards.push([{ text: KeyboardName.ke_save_edit_profile_n }]);
-        await bot.sendMessage(chatId, `${value} was adedd to list`, { reply_markup: { keyboard: interestsKeyboards } });
-      }
-    } else {
-      await ProfileSelfController.updateProfile(String(token), { [String(field)]: value });
-      await bot.sendMessage(chatId, profile_updated_text, { reply_markup: ma_main_ke });
-      await removeTelegramProfileEdit(Number(userId));
+      case "country":
+        await ProfileSelfController.updateProfile(String(token), { [String(field)]: value, state: null, city: null });
+        await bot.sendMessage(chatId, profile_updated_text, { reply_markup: ma_main_ke });
+        await removeTelegramProfileEdit(Number(userId));
+        break;
+      case "state":
+        await ProfileSelfController.updateProfile(String(token), { [String(field)]: value, city: null });
+        await bot.sendMessage(chatId, profile_updated_text, { reply_markup: ma_main_ke });
+        await removeTelegramProfileEdit(Number(userId));
+        break;
+      default:
+        await ProfileSelfController.updateProfile(String(token), { [String(field)]: value });
+        await bot.sendMessage(chatId, profile_updated_text, { reply_markup: ma_main_ke });
+        await removeTelegramProfileEdit(Number(userId));
+        break;
     }
     return;
   }

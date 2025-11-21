@@ -1,8 +1,8 @@
 import dotenv from "dotenv";
 dotenv.config({ path: "users.env" });
 
-import { createUserService } from "../../services/users.service.js";
-import { updateProfileByUserIdService } from "../../services/profile.service.js";
+import { createUserService } from "../services/users.service.js";
+import { updateProfileByUserIdService } from "../services/profile.service.js";
 import fs from "fs";
 
 const dummyUsersWithProfiles = JSON.parse(fs.readFileSync("../../shared/data/dummy-data.json", "utf-8"));

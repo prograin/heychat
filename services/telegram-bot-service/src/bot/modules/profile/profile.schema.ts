@@ -2,6 +2,7 @@ import { string, z } from "zod";
 import { INTEREST_VALUES } from "../../../../../../shared/constants/interests";
 import { CAREER_VALUES, CAREERS } from "../../../../../../shared/constants/careers";
 import { allLabelCities, allLabelCountries, allLabelStates } from "./profile.helper";
+import { GENDER_VALUES } from "../../../../../../shared/constants/genders";
 
 export const profileSchema = z.object({
   first_name: z
@@ -23,6 +24,7 @@ export const profileSchema = z.object({
   state: z.enum(allLabelStates).nullable().optional(),
   city: z.enum(allLabelCities).nullable().optional(),
   career: z.enum(CAREER_VALUES).nullable().optional(),
+  gender: z.enum(GENDER_VALUES).nullable().optional(),
   interests: z.array(z.enum(INTEREST_VALUES)).max(7, "You can select up to 7 interests only.").nullable().optional(),
   description: z
     .preprocess((val) => (val === "" || val === undefined ? null : val), z.string().trim().max(600, "Description too long").nullable())

@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config({ path: "users.env" });
 
-import { deleteUserService } from "../../services/users.service.js";
+import { deleteUserService } from "../services/users.service.js";
 import fs from "fs";
 
 const dummyUsersWithProfiles = JSON.parse(fs.readFileSync("../../shared/data/dummy-data.json", "utf-8"));
@@ -12,7 +12,7 @@ export async function removeDummyUsers() {
       try {
         await deleteUserService(item.user.id);
       } catch (err) {
-        console.error(`Error removing user ${item.id}:`, err);
+        console.error(`Error removing user ${item.user.id}:`, err);
         return { id: item.user.id, status: "failed", error: err };
       }
     });
