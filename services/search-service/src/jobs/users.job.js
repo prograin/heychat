@@ -2,7 +2,7 @@ import cron from "node-cron";
 import { getUsersLastActive } from "../cache/users.cache.js";
 import { bulkUpdateDocsService } from "../services/documents.service.js";
 
-export const syncUsersPresenceCacheJob = cron.schedule("0 */5 * * * *", async () => {
+export const syncUsersPresenceCacheJob = cron.schedule("*/5 * * * * *", async () => {
   try {
     const users_last_active = await getUsersLastActive();
     if (!users_last_active || users_last_active.length === 0) {

@@ -38,6 +38,7 @@ export const userMapping = {
       location: { type: "geo_point" },
       username: { type: "text", analyzer: "autocompletion_analyzer", search_analyzer: "standard" },
       last_active: { type: "date" },
+      has_active_chat: { type: "boolean" },
     },
   },
 };

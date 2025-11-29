@@ -52,8 +52,10 @@ const getDocuments = async (index) => {
       match_all: {},
     },
   });
-  const documents = result.hits.hits.map((hit) => hit._id);
-  console.log(documents);
+  const documents_id = result.hits.hits.map((hit) => hit._id);
+  const documents_source = result.hits.hits.map((hit) => hit._source);
+  console.log(documents_id);
+  console.log(documents_source);
 };
 
 const bulkDeleteDocuments = async (index, ids) => {
@@ -65,5 +67,6 @@ const bulkDeleteDocuments = async (index, ids) => {
 // getIndices();
 refresh("users");
 getDocuments("users");
+// getmapping("users");
 // removeDocuments("users");
 // bulkDeleteDocuments("users", ["31", "32"]);
