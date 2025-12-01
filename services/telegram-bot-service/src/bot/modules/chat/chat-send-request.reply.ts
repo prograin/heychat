@@ -5,6 +5,7 @@ import User from "src/bot/types/user.type";
 import { recieved_request, requests_was_sent_text, send_request_text, user_has_active_session } from "./chat.text";
 import { ma_send_request_in } from "./chat.markup";
 import BotResponse from "src/bot/types/bot-response.type";
+import { ma_main_ke } from "../start/start.markup";
 
 const THRESHOLD = 4 * 60 * 1000;
 
@@ -14,11 +15,19 @@ async function chatSendRequestReply(bot: TelegramBot, callbackQuery: CallbackQue
     return;
   }
 
+  const to_user_session = await ChatSelfController.checkUserActiveSession(response.user.token as string, to_user_id);
+  if (to_user_session.data.isActive) {
+    await bot.sendMessage(Number(callbackQuery.message?.chat.id), "This user is currently in a chat with someone else.", {
+      reply_markup: { keyboard: ma_main_ke.keyboard },
+    });
+    return;
+  }
+
   const to_user_response = await UserAdminController.getUserById(to_user_id);
-  const from_user = response.user;
   const to_user = to_user_response.data;
   const to_telegram_chat_id = to_user.telegram_chat_id;
 
+  const from_user = response.user;
   const from_user_id = from_user.id;
   const from_token = from_user.token;
   const from_username = from_user.profile?.username;

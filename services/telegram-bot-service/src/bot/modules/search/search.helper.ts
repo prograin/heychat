@@ -1,17 +1,21 @@
 import { QueryFilter } from "./search.type";
 
 export function buildUserSearchMessage(user: any) {
-  const username = user.username || "Unknown";
-  const firstName = user.first_name || "Not provided";
-  const age = user.age ? `${user.age} years old` : "Not provided";
-  const state = user.state || "Not provided";
-  const city = user.city || "Not provided";
-  const country = user.country || "Not provided";
-  const gender = user.gender || "Not provided";
-  const lastActive = user.last_active || "Unknown";
-  const career = user.career || "Not provided";
-  const interests = Array.isArray(user.interests) ? user.interests.join(", ") : "Not provided";
+  const missing = "❓";
 
+  const username = user.username || missing;
+  const firstName = user.first_name || missing;
+  const age = user.age ? `${user.age} years old` : missing;
+  const state = user.state || missing;
+  const city = user.city || missing;
+  const country = user.country || missing;
+  const gender = user.gender || missing;
+  const lastActive = formatLastSeenIranFa(user.last_active);
+  const hasActiveChat = user.has_active_chat || false;
+  const career = user.career || missing;
+  const interests = Array.isArray(user.interests) ? user.interests.join(", ") : missing;
+
+  const chatStatusIcon = hasActiveChat ? "🟢" : "🔴";
   const genderSticker = gender.toLowerCase() === "female" ? "🙍‍♀️" : gender.toLowerCase() === "male" ? "🙍‍♂️" : "⚧";
 
   const location = [country, state, city].filter(Boolean).join(", ");
@@ -22,6 +26,8 @@ export function buildUserSearchMessage(user: any) {
 <b>Location</b>   : <b>${location}</b>
 <b>Career</b>     : <b>${career}</b>
 <b>Interests</b>  : <b>${interests}</b>
+----------------
+<b>In Chat</b>    : <b>${chatStatusIcon}</b>
 <b>Last Seen</b>  : <b>${lastActive}</b>
 </blockquote>\n
 `;
@@ -38,28 +44,33 @@ export function buildProfileSearch(profile: any) {
   const city = profile.city || missing;
   const state = profile.state || missing;
   const country = profile.country || missing;
+  const lastActive = formatLastSeenIranFa(profile.last_active);
+  const hasActiveChat = profile.has_active_chat || false;
   const description = profile.description || null;
-
   const interestsStr = Array.isArray(profile.interests) && profile.interests.length > 0 ? profile.interests.join(", ") : missing;
 
   let genderSticker = "⚧";
   if (gender.toLowerCase() === "male") genderSticker = "👨";
   else if (gender.toLowerCase() === "female") genderSticker = "👩";
 
-  // Career sticker
   let careerSticker = "💼";
   if (career.toLowerCase().includes("teacher")) careerSticker = "📚";
   else if (career.toLowerCase().includes("developer")) careerSticker = "💻";
 
+  const chatStatusIcon = hasActiveChat ? "🟢" : "🔴";
+
   let profileText = `<b>🆔 Username:</b>/username_${profile.username || missing}
 ${genderSticker} <b>Name:</b> ${firstName} ${lastName}
-🎂 <b>Age:</b> ${age}
-${careerSticker} <b>Career:</b> ${career}
-⭐ <b>Interests:</b> ${interestsStr}
-📍 <b>Location:</b> ${city}, ${state}, ${country}`;
+🎂 <b>Age</b>    : ${age}
+${careerSticker} <b>Career</b>    : ${career}
+⭐ <b>Interests</b>    : ${interestsStr}
+📍 <b>Location</b>    : ${city}, ${state}, ${country}
+----------------
+<b>In Chat</b>    : <b>${chatStatusIcon}</b>
+<b>Last Seen</b>  : <b>${lastActive}</b>`;
 
   if (description) {
-    profileText += `\n<b>💬 Description:</b> <blockquote>${description}"</blockquote>`;
+    profileText += `\n----------------\n<b>💬 Description:</b> <blockquote>${description}"</blockquote>`;
   }
 
   return profileText;
@@ -94,4 +105,30 @@ export function buildSearchQueryOptions(selectedFields: string[] | null, userPro
     },
   };
   return query;
+}
+
+function formatLastSeenIranFa(date?: string | Date | null) {
+  if (!date) return "A long time ago";
+
+  const iranLocalString = new Date(date).toLocaleString("en-US", {
+    timeZone: "Asia/Tehran",
+  });
+
+  const iranDate = new Date(iranLocalString);
+  const nowIran = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Tehran" }));
+
+  const diff = (nowIran.getTime() - iranDate.getTime()) / 1000;
+
+  const minutes = diff / 60;
+  const hours = minutes / 60;
+  const days = hours / 24;
+  const weeks = days / 7;
+
+  if (minutes < 1) return "Just now";
+  if (minutes < 60) return `${Math.floor(minutes)} minutes ago`;
+  if (hours < 24) return `${Math.floor(hours)} hours ago`;
+  if (days < 7) return `${Math.floor(days)} days ago`;
+  if (weeks < 1) return "About a week ago";
+
+  return "A long time ago";
 }

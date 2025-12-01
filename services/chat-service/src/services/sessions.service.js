@@ -8,6 +8,7 @@ import {
   getActiveSessions,
 } from "../repositories/sessions.repository.js";
 import sessionsCache from "../cache/sessions.cache.js";
+import sessionProducer from "../event/producers/session.producer.js";
 
 export const createSessionService = async (userId, partnerId) => {
   const existing = await getSessionsByFilter({ userId, partnerId, status: "active" });
@@ -15,6 +16,7 @@ export const createSessionService = async (userId, partnerId) => {
 
   const session = await createSession(userId, partnerId, "active");
   await sessionsCache.setHasActiveSession(userId, true);
+  await sessionProducer.publishSessionCreated(userId, {});
   return session;
 };
 
@@ -34,6 +36,7 @@ export const updateSessionService = async (userId, partnerId, status) => {
   const updated = await updateSessionStatus(userId, partnerId, status);
   if (!updated) throw new ErrorUtil("Session not found", 404);
   await sessionsCache.setHasActiveSession(userId, status === "active");
+  await sessionProducer.publishSessionUpdated(userId, { has_active_chat: status === "active" });
   return updated;
 };
 

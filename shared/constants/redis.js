@@ -19,6 +19,11 @@ export const REDIS_STREAMS = {
     name: "user",
     profile: { name: "user:profile" },
   },
+  chat: {
+    session: {
+      name: "chat:session",
+    },
+  },
 };
 
 export const REDIS_EVENTS = {
@@ -27,6 +32,12 @@ export const REDIS_EVENTS = {
     deleted: "USER_DELETED",
     profile: {
       updated: "USER_PROFILE_UPDATED",
+    },
+  },
+  chat: {
+    session: {
+      created: "SESSION_CREATED",
+      updated: "SESSION_UPDATED",
     },
   },
 };

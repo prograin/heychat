@@ -12,6 +12,24 @@ export const setUsersLastActive = async (userId, timestamp) => {
   }
 };
 
+export const getUserLastActive = async (userId) => {
+  try {
+    const score = await redis.zscore(KEYS.users.presence.last_active, userId.toString());
+
+    if (!score) {
+      return null; // User not found in cache
+    }
+
+    return {
+      user_id: userId,
+      last_active: new Date(Number(score)),
+    };
+  } catch (error) {
+    console.error("Redis ZSCORE error:", error);
+    return null;
+  }
+};
+
 export const getUsersLastActive = async () => {
   const data = await redis.zrange(KEYS.users.presence.last_active, 0, -1, "WITHSCORES");
 

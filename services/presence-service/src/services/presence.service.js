@@ -1,3 +1,4 @@
+import { getUserLastActive } from "../cache/users.cache.js";
 import {
   createPresenceRepository,
   getPresenceByUserIdRepository,
@@ -42,8 +43,11 @@ export const bulkUpdatePresenceService = async (data) => {
  * @param {number} data.user_id - ID of the user.
  * @returns {Promise<Object|null>} The validated presence object if found, otherwise null.
  */
-export const getPresenceByUserIdService = async (data) => {
-  const presence = await getPresenceByUserIdRepository(data.user_id);
+export const getPresenceService = async (user_id) => {
+  let presence = getUserLastActive(user_id);
+  if (presence) return presence;
+
+  presence = await getPresenceByUserIdRepository(user_id);
   if (!presence) return null;
 
   const value = await validateSchemaUtil(responsePresencesSchema, presence.toJSON(), false, true);

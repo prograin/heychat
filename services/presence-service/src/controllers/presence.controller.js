@@ -1,4 +1,4 @@
-import { createPresenceService, getPresenceByUserIdService, deletePresenceByUserIdService } from "../services/presence.service.js";
+import { createPresenceService, getPresenceService, deletePresenceByUserIdService } from "../services/presence.service.js";
 
 export const postPresenceController = async (req, res, next) => {
   try {
@@ -12,18 +12,22 @@ export const postPresenceController = async (req, res, next) => {
   }
 };
 
-export const getPresenceByUserIdController = async (req, res, next) => {
+export const getPresenceController = async (req, res, next) => {
   try {
-    const user_id = Number(req.query.userId);
+    const user_id = Number(req.params.userId || req.query.userId);
 
-    if (user_id) {
-      const presence = await getPresenceByUserIdService(user_id);
-      if (!presence) return res.status(404).json({ message: "Presence not found" });
-    } else {
+    if (!user_id) {
       return res.status(400).json({ message: "(user_id) is required" });
     }
 
-    res.status(200).json({ data: presence });
+    // presence is in function scope now
+    const presence = await getPresenceService(user_id);
+
+    if (!presence) {
+      return res.status(404).json({ message: "Presence not found" });
+    }
+
+    return res.status(200).json({ data: presence });
   } catch (err) {
     next(err);
   }

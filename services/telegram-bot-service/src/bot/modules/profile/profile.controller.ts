@@ -43,6 +43,10 @@ export class ProfileSelfController {
       throw Error(validatedData.errors);
     }
   }
+
+  static async getUserPresence(token: string, userId: number) {
+    return await ProfileUserService.getUserPresence(token, userId);
+  }
 }
 
 export class ProfileAdminController {

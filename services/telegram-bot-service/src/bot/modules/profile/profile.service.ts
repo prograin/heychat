@@ -27,6 +27,10 @@ export class ProfileUserService {
   static async updateProfile(token: string, data: Record<any, any>) {
     return await UserAxiosInstance.put(`http://${process.env.API_URL}:3004/profiles/me`, data, { headers: { token: token } });
   }
+
+  static async getUserPresence(token: string, userId: number) {
+    return await UserAxiosInstance.get(`http://${process.env.API_URL}:3001/users/${userId}`, { headers: { token: token } });
+  }
 }
 
 export class ProfileAdminService {
