@@ -94,16 +94,8 @@ export class RelationSelfController {
     }
   };
 
-  static checkBlockByTargetId = async (token: string, targetId: string) => {
-    try {
-      const response = await RelationsSelfService.checkBlockByTargetId(token, targetId);
-      if (response.status === 200) {
-        return { error: false, isBlocked: response.data.isBlocked, status: 200 };
-      } else {
-        throw new Error(`❌ Unexpected response status when checking block: ${response.status}`);
-      }
-    } catch (error) {
-      throw error;
-    }
+  static checkBlockByTargetId = async (token: string, targetId: string, userId: string) => {
+    const response = await RelationsSelfService.checkBlockByTargetId(token, targetId, userId);
+    return { error: false, isBlocked: response.data.isBlocked, status: 200 };
   };
 }

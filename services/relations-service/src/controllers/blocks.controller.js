@@ -59,7 +59,7 @@ export async function deleteBlockByTargetIdController(req, res, next) {
  */
 export async function checkBlockByTargetIdController(req, res, next) {
   try {
-    const requesterId = req.params.user_id || req.user?.user_id;
+    const requesterId = req.params.userId || req.user?.user_id; // <---Problem here userId undefined
     const targetId = req.params.targetId;
 
     const isBlocked = await checkBlockByTargetIdService(requesterId, targetId);

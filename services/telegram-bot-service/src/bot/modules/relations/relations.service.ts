@@ -67,10 +67,9 @@ export class RelationsSelfService {
     return response;
   }
 
-  static async checkBlockByTargetId(token: string, targetId: string) {
-    const response = await UserAxiosInstance.get(`http://${process.env.API_URL}:3007/relations/blocks/check/${targetId}`, {
+  static async checkBlockByTargetId(token: string, targetId: string, userId: string) {
+    const response = await UserAxiosInstance.get(`http://${process.env.API_URL}:3007/users/${userId}/relations/blocks/check/${targetId}`, {
       headers: { token: token },
-      validateStatus: (status) => status < 500,
     });
     return response;
   }

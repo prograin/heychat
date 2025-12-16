@@ -8,7 +8,7 @@ import {
   getUserBlocksController,
 } from "../../controllers/blocks.controller.js";
 
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 router.post("/", authMiddleware, allowRole("user", "admin"), createBlockController);
 router.get("/", authMiddleware, allowRole("user", "admin"), getUserBlocksController);

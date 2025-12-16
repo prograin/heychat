@@ -13,7 +13,7 @@ async function searchProfileReply(bot: TelegramBot, message: Message | undefined
   if (!toProfile) {
     await bot.sendMessage(message!.chat.id, profile_not_found_text(username));
   } else {
-    const blockResponse = await RelationSelfController.checkBlockByTargetId(fromUser.token || "", toProfile.user_id);
+    const blockResponse = await RelationSelfController.checkBlockByTargetId(fromUser.token || "", toProfile.user_id, String(fromUser.id));
     const contactResponse = await RelationSelfController.checkContactByTargetId(fromUser.token || "", toProfile.user_id);
     const toUserSession = await ChatSelfController.checkUserActiveSession(fromUser.token || "", toProfile.user_id);
     const toLastActive = await ProfileSelfController.getUserPresence(fromUser.token || "", toProfile.user_id);

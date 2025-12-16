@@ -97,10 +97,10 @@ export const searchMainReplyInit = async (bot: TelegramBot, event: BotEvent, res
     } else if ("text" in event) {
       await searchMainReplyMessage(bot, event, response, telegramSearchData, searchPermission);
     }
-  } catch (error) {
+  } catch (error: any) {
     const chatId = "chat" in event ? event.chat.id : event.message?.chat.id;
     if (chatId) {
-      await bot.sendMessage(chatId, "Something went wrong while processing your search. Please try again.");
+      await bot.sendMessage(chatId, error.response?.data?.message || "Something went wrong while processing your search. Please try again.");
     }
 
     if ("data" in event && "id" in event) {

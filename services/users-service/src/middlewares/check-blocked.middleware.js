@@ -9,7 +9,7 @@ export const checkBlockedMiddleware = async (req, res, next) => {
       return res.status(403).json({ message: "Something went wrong. Please try again." });
     }
 
-    const response = await axios.get(`http://${process.env.API_URL}:3007/relations/blocks/check/${targetId}`, {
+    const response = await axios.get(`http://${process.env.API_URL}:3007/users/${targetId}/relations/blocks/check/${requesterId}`, {
       headers: { Authorization: req.headers.authorization },
     });
 

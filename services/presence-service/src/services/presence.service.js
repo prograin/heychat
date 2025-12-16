@@ -44,7 +44,7 @@ export const bulkUpdatePresenceService = async (data) => {
  * @returns {Promise<Object|null>} The validated presence object if found, otherwise null.
  */
 export const getPresenceService = async (user_id) => {
-  let presence = getUserLastActive(user_id);
+  let presence = await getUserLastActive(user_id);
   if (presence) return presence;
 
   presence = await getPresenceByUserIdRepository(user_id);
